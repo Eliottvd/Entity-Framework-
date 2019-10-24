@@ -11,6 +11,7 @@ namespace DAL
         public TodoCtx() : base()
         {
 
+
         }
 
         public DbSet<Todo> TabDbSet { get; set; }
