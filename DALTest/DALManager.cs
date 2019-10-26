@@ -7,8 +7,25 @@ using System.Threading.Tasks;
 
 namespace DALTest
 {
-    class DALManager
+    class DALManager: IDisposable
     {
-        private readonly TodoCtx todoCtx;
+        private readonly TodoCtx _todoCtx;
+
+        public DALManager()
+        {
+            _todoCtx = new TodoCtx(); 
+        }
+
+        public void AddTodo(Todo todo)
+        {
+            _todoCtx.TabTodos.Add(todo);
+            _todoCtx.SaveChanges();
+
+        }
+
+        public void Dispose()
+        {
+            _todoCtx.Dispose();
+        }
     }
 }

@@ -14,6 +14,6 @@ namespace DAL
 
         }
 
-        public DbSet<Todo> TabDbSet { get; set; }
+        public DbSet<Todo> TabTodos { get; set; }
     }
 }
