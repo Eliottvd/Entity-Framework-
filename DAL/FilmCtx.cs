@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data.Entity;
-using DAl;
 
 namespace DAL
 {
-    class FilmCtx : DbContext
+    public class FilmCtx : DbContext
     {
-        public FilmCtx() : base()
+        public FilmCtx() : base("db_films")
         {
 
 

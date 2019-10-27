@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    class Film
+    public class Film
     {
         public int FilmID { get; set; }
         public string Title { get; set; }

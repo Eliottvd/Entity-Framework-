@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    class Comment
+    public class Comment
     {
         public int CommentId { get; set; }
         public string Content { get; set; }

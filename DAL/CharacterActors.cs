@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL
 {
-    class CharacterActors
+    public class CharacterActors
     {
         [Key, Column(Order = 0)]
         public int CharacterId { get; set; }
