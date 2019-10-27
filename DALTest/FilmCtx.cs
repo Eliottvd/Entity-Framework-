@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data.Entity;
-using DALTest;
+using DAl;
 
 namespace DAL
 {
