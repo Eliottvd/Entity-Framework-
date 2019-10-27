@@ -1,3 +1,2 @@
-# Exemple de petit programme utilisant entity Framework
-
+# Labo 3 Entity Framework
 
