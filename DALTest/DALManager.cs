@@ -9,23 +9,54 @@ namespace DALTest
 {
     class DALManager: IDisposable
     {
-        private readonly TodoCtx _todoCtx;
+        private readonly FilmCtx _filmCtx;
 
         public DALManager()
         {
-            _todoCtx = new TodoCtx(); 
+            _filmCtx = new FilmCtx(); 
+        }
+        
+        public void AddFilm(Film film)
+        {
+            _filmCtx.Films.Add(film);
+            _filmCtx.SaveChanges();
         }
 
-        public void AddTodo(Todo todo)
+        public void AddCharacter(Character character)
         {
-            _todoCtx.TabTodos.Add(todo);
-            _todoCtx.SaveChanges();
+            _filmCtx.Characters.Add(character);
+            _filmCtx.SaveChanges();
+        }
 
+        public void AddActor(Actor actor)
+        {
+            _filmCtx.Actors.Add(actor);
+            _filmCtx.SaveChanges();
+        }
+
+        public void AddCharacterActors(Film film, Character character, Actor actor)
+        {
+            CharacterActors CA = new CharacterActors(film, character, actor);
+            _filmCtx.CharacterActors.Add(CA);
+            _filmCtx.SaveChanges();
+        }
+
+        public void AddComment(Comment comment)
+        {
+            if(comment.Rate > 5 || comment.Rate < 0)
+            {
+                
+            }
+            else
+            {
+                _filmCtx.Comments.Add(comment);
+                _filmCtx.SaveChanges();
+            }
         }
 
         public void Dispose()
         {
-            _todoCtx.Dispose();
+            _filmCtx.Dispose();
         }
     }
 }
