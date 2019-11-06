@@ -9,7 +9,7 @@ namespace DAL
     {
         public FilmCtx(string connString) : base(connString)
         {
-
+            Database.SetInitializer<FilmCtx>(new DropCreateDatabaseAlways<FilmCtx>());
 
         }
 

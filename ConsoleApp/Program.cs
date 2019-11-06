@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,15 +13,36 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            using (var dal = new DALManager("FilmDB"))
+            StreamReader f = new StreamReader(@"D:\OneDrive - Enseignement de la Province de Liège\Ecole\BLOC3\Q1\C#\movies_v2.txt");
+            for (int i =0; i < 5; i++)
             {
-                var film = new Film() { Title = "Eliott découvre un gros concombre" };
-                dal.AddFilm(film);
-
-                var actor = new Actor() { Name = "Clara Morgane" };
-                dal.AddActor(actor);
+                readAnddecodeline(f);
             }
 
+            Console.ReadKey();
+        }
+
+        private static bool readAnddecodeline(StreamReader f)
+        {
+            string line = f.ReadLine();
+            if (line == null)
+                return false;
+
+            // Creation d'un objet film
+            FilmParser filmtext = new FilmParser();
+            Film film = filmtext.DecodeFilmText(line);
+
+            SaveFilmToDataBase(film);
+
+            return true;
+        }
+
+        private static void SaveFilmToDataBase(Film film)
+        {
+            using (var dal = new DALManager("db_film3"))
+            {
+                dal.AddFilm(film);
+            }
         }
     }
 }

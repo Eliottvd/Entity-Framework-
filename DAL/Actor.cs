@@ -11,6 +11,14 @@ namespace DAL
         public int ActorId { get; set; }
         public string Name { get; set; }
 
+        public Actor() { }
+
+        public Actor(string[] acteurdetail)
+        {
+            ActorId = Int32.Parse(acteurdetail[0]);
+            Name = acteurdetail[1];
+            CharacterActors = new List<CharacterActors>();
+        }
 
         public virtual ICollection<CharacterActors> CharacterActors { get; set; }
     }
