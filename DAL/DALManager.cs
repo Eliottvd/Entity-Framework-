@@ -27,8 +27,11 @@ namespace DAL
             //foreach (Director d in film.Directors)
             //    this.AddDirector(d);
 
-            _filmCtx.Films.Add(film);
+            foreach (Genre g in film.Genres)
+                if (_filmCtx.Genre.Any(o => o.GenreId == g.GenreId))
+                    _filmCtx.Genre.Attach(g);
 
+            _filmCtx.Films.Add(film);
             _filmCtx.SaveChanges();
         }
 
