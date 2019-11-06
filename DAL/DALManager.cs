@@ -14,13 +14,12 @@ namespace DAL
         public DALManager(string connString)
         {
             _filmCtx = new FilmCtx(connString);
-            
+            if (!_filmCtx.Database.Exists())
+                Console.WriteLine("Création de la base " + connString);
         }
         
         public void AddFilm(Film film)
         {
-            bool t = _filmCtx.Database.Exists();
-            Console.WriteLine("TEST" + t);
             _filmCtx.Films.Add(film);
             _filmCtx.SaveChanges();
         }

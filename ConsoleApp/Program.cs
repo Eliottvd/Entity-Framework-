@@ -12,20 +12,14 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            DALManager dal = new DALManager("FilmDB");
-            var film = new Film() { FilmID = 1, Title = "DaniLecx" };
-            dal.AddFilm(film);
-            //using (var ctx = new FilmCtx("bdfilmscsharp"))
-            //{
-                
-            //    var film = new Film() { FilmID = 1, Title = "DaniLecx" };
-            //    ctx.Films.Add(film);
-            //    ctx.SaveChanges();
+            using (var dal = new DALManager("FilmDB"))
+            {
+                var film = new Film() { Title = "Eliott découvre un gros concombre" };
+                dal.AddFilm(film);
 
-
-            //    Console.Write("Student saved successfully!");
-            //    Console.Write("Student", ctx.Films.ToList());
-            //}
+                var actor = new Actor() { Name = "Clara Morgane" };
+                dal.AddActor(actor);
+            }
 
         }
     }
