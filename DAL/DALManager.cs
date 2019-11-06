@@ -7,17 +7,20 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    class DALManager: IDisposable
+    public class DALManager: IDisposable
     {
         private readonly FilmCtx _filmCtx;
 
-        public DALManager()
+        public DALManager(string connString)
         {
-            _filmCtx = new FilmCtx(); 
+            _filmCtx = new FilmCtx(connString);
+            
         }
         
         public void AddFilm(Film film)
         {
+            bool t = _filmCtx.Database.Exists();
+            Console.WriteLine("TEST" + t);
             _filmCtx.Films.Add(film);
             _filmCtx.SaveChanges();
         }

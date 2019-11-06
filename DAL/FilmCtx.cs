@@ -7,7 +7,7 @@ namespace DAL
 {
     public class FilmCtx : DbContext
     {
-        public FilmCtx() : base("db_films")
+        public FilmCtx(string connString) : base(connString)
         {
 
 
