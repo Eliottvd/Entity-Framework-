@@ -55,6 +55,7 @@
     <Compile Include="Character.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="DALManager.cs" />
+    <Compile Include="Director.cs" />
     <Compile Include="Film.cs" />
     <Compile Include="CharacterActors.cs" />
     <Compile Include="Genre.cs" />

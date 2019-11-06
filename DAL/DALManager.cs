@@ -1,6 +1,7 @@
 ﻿using DAL;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace DAL
 
         public DALManager(string connString)
         {
+            
             _filmCtx = new FilmCtx(connString);
             if (!_filmCtx.Database.Exists())
                 Console.WriteLine("Création de la base " + connString);
@@ -20,27 +22,67 @@ namespace DAL
         
         public void AddFilm(Film film)
         {
+            //foreach (CharacterActors c in film.CharacterActors)
+            //    this.AddCharacterActors(c);
+            //foreach (Director d in film.Directors)
+            //    this.AddDirector(d);
+
             _filmCtx.Films.Add(film);
+
             _filmCtx.SaveChanges();
         }
 
         public void AddCharacter(Character character)
         {
-            _filmCtx.Characters.Add(character);
-            _filmCtx.SaveChanges();
+            if (!_filmCtx.Characters.Any(o => o.CharacterId == character.CharacterId))
+            {
+                _filmCtx.Characters.Add(character);
+                _filmCtx.SaveChanges();
+            }
         }
 
         public void AddActor(Actor actor)
         {
-            _filmCtx.Actors.Add(actor);
-            _filmCtx.SaveChanges();
+            if (!_filmCtx.Actors.Any(o => o.ActorId == actor.ActorId))
+            {
+                _filmCtx.Actors.Add(actor);
+                _filmCtx.SaveChanges();
+            }
         }
 
-        public void AddCharacterActors(Film film, Character character, Actor actor)
+        public void AddCharacterActors(CharacterActors ca)
         {
-            CharacterActors CA = new CharacterActors(film, character, actor);
-            _filmCtx.CharacterActors.Add(CA);
+            //if (!_filmCtx.Actors.Any(o => o.ActorId == ca.ActorId))
+            //    this.AddActor(ca.Actor);
+            //if (!_filmCtx.Characters.Any(o => o.CharacterId == ca.CharacterId))
+            //    this.AddCharacter(ca.Character);
+
+            _filmCtx.CharacterActors.Add(ca);
             _filmCtx.SaveChanges();
+        }
+        public void AddDirector(Director director)
+        {
+            if (!_filmCtx.Directors.Any(o => o.DirectorId == director.DirectorId))
+            {
+                _filmCtx.Directors.Add(director);
+                _filmCtx.SaveChanges();
+            }
+                
+        }
+
+        public void AddGenre(Genre genre)
+        {
+            if(_filmCtx.Genre.Any(o => o.GenreId == genre.GenreId))
+            {
+                Console.WriteLine("Exists !");
+            }
+            else
+            {
+                Console.WriteLine("Doesnt Exists !");
+                _filmCtx.Genre.Add(genre);
+                _filmCtx.SaveChanges();
+            }
+            
         }
 
         public void AddComment(Comment comment)
