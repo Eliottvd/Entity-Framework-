@@ -21,5 +21,7 @@ namespace DAL
         public DbSet<Director> Directors { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Genre> Genre { get; set; }
+        public DbSet<Rating> Rating { get; set; }
+        public DbSet<Status> Status { get; set; }
     }
 }

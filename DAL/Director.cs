@@ -18,6 +18,7 @@ namespace DAL
             directordetail = text.Split(delimiterChars);
             DirectorId = Int32.Parse(directordetail[0]);
             DirectorName = directordetail[1];
+            Film = new List<Film>();
         }
         public virtual ICollection<Film> Film { get; set; }
     }

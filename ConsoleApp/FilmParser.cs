@@ -32,11 +32,13 @@ namespace ConsoleApp
             f.Title = filmdetailwords[1];
             f.OriginalTitle = filmdetailwords[2];
             f.ReleaseDate = DateTime.ParseExact(filmdetailwords[3], "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            f.Status = filmdetailwords[4];
+            f.Status = new Status(filmdetailwords[4]);
+            f.Status.Film.Add(f);
             f.VoteAverage = float.Parse(filmdetailwords[5]);
             f.VoteCount = Int32.Parse(filmdetailwords[6]);
             f.Runtime = Int32.Parse(filmdetailwords[7]);
-            f.Rating = filmdetailwords[8];
+            f.Rating = new Rating(filmdetailwords[8]);
+            f.Rating.Film.Add(f);
             f.Posterpath = filmdetailwords[9];
             f.Budget = Int32.Parse(filmdetailwords[10]);
             f.TagLine = filmdetailwords[11];
@@ -49,15 +51,20 @@ namespace ConsoleApp
                 foreach (string s in genres)
                 {
                     if (s.Length > 0)
-                            f.Genres.Add(new Genre(s));
-                        
+                    {
+                        Genre g = new Genre(s);
+                        g.Film.Add(f);
+                        f.Genres.Add(g);
+                    }
                 }
                 // Parse directors
                 directors = filmdetailwords[13].Split(delimiterChars);
                 foreach (string s in directors)
                     if (s.Length > 0)
                     {
-                        f.Directors.Add(new Director(s));
+                        Director d = new Director(s);
+                        d.Film.Add(f);
+                        f.Directors.Add(d);
                     }
                 // Parse actors
                 actors = filmdetailwords[14].Split(delimiterChars);

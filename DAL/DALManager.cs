@@ -31,7 +31,20 @@ namespace DAL
                 if (_filmCtx.Genre.Any(o => o.GenreId == g.GenreId))
                     _filmCtx.Genre.Attach(g);
 
+            
+            //if (_filmCtx.Rating.Any(o => o.Type == film.Rating.Type))
+            //    _filmCtx.Rating.Attach(_filmCtx.Rating.First(o => o.Type == film.Rating.Type));
+
+            //if (_filmCtx.Status.Any(o => o.StatusName == film.Status.StatusName))
+            //{
+            //    Status s = _filmCtx.Status.First(o => o.StatusName == film.Status.StatusName);
+            //    film.Status.StatusId = s.StatusId;
+            //    _filmCtx.Status.Attach(film.Status);
+            //}
+               
+            // BUG SINCE ADDED Film TO COLLECTION IN Rating, Status, Director, etc
             _filmCtx.Films.Add(film);
+            
             _filmCtx.SaveChanges();
         }
 

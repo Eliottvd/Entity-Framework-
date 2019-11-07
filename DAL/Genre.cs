@@ -22,6 +22,7 @@ namespace DAL
             genredetail = text.Split(delimiterChars);
             GenreId = Int32.Parse(genredetail[0]);
             Name = genredetail[1];
+            Film = new List<Film>();
         }
         public virtual ICollection<Film> Film { get; set; }
     }
