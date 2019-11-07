@@ -11,6 +11,11 @@ namespace DAL
         public int CharacterId { get; set; }
         public string CharacterName { get; set; }
 
+        public Character()
+        {
+
+        }
+
         public Character(string Name)
         {
             CharacterName = Name;

@@ -14,7 +14,6 @@ namespace DAL
 
         public DALManager(string connString)
         {
-            
             _filmCtx = new FilmCtx(connString);
             if (!_filmCtx.Database.Exists())
                 Console.WriteLine("Création de la base " + connString);
@@ -27,10 +26,31 @@ namespace DAL
             //foreach (Director d in film.Directors)
             //    this.AddDirector(d);
 
+            foreach (CharacterActors ca in film.CharacterActors)
+            {
+
+
+                if (_filmCtx.Characters.Any(o => o.CharacterName == ca.Character.CharacterName))
+                {
+                    Character c = _filmCtx.Characters.First(o => o.CharacterName == ca.Character.CharacterName);
+                    ca.Character.CharacterId = c.CharacterId;
+                    ca.CharacterId = c.CharacterId;
+                    _filmCtx.Characters.Attach(c);
+                }
+                    
+
+                //if (_filmCtx.CharacterActors.Any(o => o == ca))
+                //    _filmCtx.CharacterActors.Attach(ca);
+            }
+
+
             foreach (Genre g in film.Genres)
                 if (_filmCtx.Genre.Any(o => o.GenreId == g.GenreId))
                     _filmCtx.Genre.Attach(g);
 
+            foreach (Director d in film.Directors)
+                if (_filmCtx.Directors.Any(o => o.DirectorId == d.DirectorId))
+                    _filmCtx.Directors.Attach(d);
 
             if (_filmCtx.Rating.Any(o => o.Type == film.Rating.Type))
             {
@@ -44,7 +64,6 @@ namespace DAL
                 _filmCtx.Status.Attach(film.Status); 
             }
 
-            // BUG SINCE ADDED Film TO COLLECTION IN Rating, Status, Director, etc
             _filmCtx.Films.Add(film);
             
             _filmCtx.SaveChanges();

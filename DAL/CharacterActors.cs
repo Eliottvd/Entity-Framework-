@@ -24,8 +24,11 @@ namespace DAL
 
         public CharacterActors(Film f, Character c, Actor a)
         {
+            CharacterId = c.CharacterId;
             Character = c;
+            FilmId = f.FilmId;
             Film = f;
+            ActorId = a.ActorId;
             Actor = a;
         }
 
