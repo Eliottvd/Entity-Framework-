@@ -32,8 +32,11 @@ namespace DAL
                     _filmCtx.Genre.Attach(g);
 
 
-            //if (_filmCtx.Rating.Any(o => o.Type == film.Rating.Type))
-            //    _filmCtx.Rating.Attach(_filmCtx.Rating.First(o => o.Type == film.Rating.Type));
+            if (_filmCtx.Rating.Any(o => o.Type == film.Rating.Type))
+            {
+                film.Rating = _filmCtx.Rating.First(o => o.Type == film.Rating.Type);
+                _filmCtx.Rating.Attach(film.Rating);
+            }
 
             if (_filmCtx.Status.Any(o => o.StatusName == film.Status.StatusName))
             {

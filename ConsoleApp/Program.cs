@@ -13,8 +13,8 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            StreamReader f = new StreamReader(@"D:\GoogleDrive\Ecole\2019-2020\3e Indus\C#\Entity-Framework\movies_v2.txt");
-            for (int i =0; i < 1000; i++)
+            StreamReader f = new StreamReader(@"D:\OneDrive - Enseignement de la Province de Liège\Ecole\BLOC3\Q1\C#\movies_v2.txt");
+            for (int i =0; i < 100; i++)
             {
                 readAnddecodeline(f);
                 Console.WriteLine("Decoding line " + i);
