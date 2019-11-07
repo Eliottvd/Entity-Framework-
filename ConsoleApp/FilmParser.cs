@@ -39,6 +39,7 @@ namespace ConsoleApp
             f.Runtime = Int32.Parse(filmdetailwords[7]);
             f.Rating = new Rating(filmdetailwords[8]);
             f.Rating.Film.Add(f);
+            // http://image.tmdb.org/t/p/w185/
             f.Posterpath = filmdetailwords[9];
             f.Budget = Int32.Parse(filmdetailwords[10]);
             f.TagLine = filmdetailwords[11];
@@ -53,7 +54,7 @@ namespace ConsoleApp
                     if (s.Length > 0)
                     {
                         Genre g = new Genre(s);
-                        g.Film.Add(f);
+                        //g.Film.Add(f);
                         f.Genres.Add(g);
                     }
                 }
@@ -63,7 +64,7 @@ namespace ConsoleApp
                     if (s.Length > 0)
                     {
                         Director d = new Director(s);
-                        d.Film.Add(f);
+                        //d.Film.Add(f);
                         f.Directors.Add(d);
                     }
                 // Parse actors
