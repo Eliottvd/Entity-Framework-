@@ -64,6 +64,7 @@ namespace ConsoleApp
                     if (s.Length > 0)
                     {
                         Director d = new Director(s);
+                        //d.Film.Add(f);
                         f.Directors.Add(d);
                     }
                 // Parse actors

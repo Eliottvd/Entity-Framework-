@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class DALManager: IDisposable
+    public class DALManager : IDisposable
     {
         private readonly FilmCtx _filmCtx;
 
@@ -18,39 +18,35 @@ namespace DAL
             if (!_filmCtx.Database.Exists())
                 Console.WriteLine("Création de la base " + connString);
         }
-        
+
         public void AddFilm(Film film)
         {
-            //foreach (CharacterActors c in film.CharacterActors)
-            //    this.AddCharacterActors(c);
-            //foreach (Director d in film.Directors)
-            //    this.AddDirector(d);
 
             foreach (CharacterActors ca in film.CharacterActors)
             {
-
-
                 if (_filmCtx.Characters.Any(o => o.CharacterName == ca.Character.CharacterName))
                 {
-                    Character c = _filmCtx.Characters.First(o => o.CharacterName == ca.Character.CharacterName);
-                    ca.Character.CharacterId = c.CharacterId;
-                    ca.CharacterId = c.CharacterId;
-                    _filmCtx.Characters.Attach(c);
+                    ca.Character.CharacterId = _filmCtx.Characters.First(o => o.CharacterName == ca.Character.CharacterName).CharacterId;
+                    ca.CharacterId = ca.Character.CharacterId;
+                    // ATTACH BUG
+                    //_filmCtx.Characters.Attach(ca.Character);
+
                 }
-                    
-
-                //if (_filmCtx.CharacterActors.Any(o => o == ca))
-                //    _filmCtx.CharacterActors.Attach(ca);
             }
-
 
             foreach (Genre g in film.Genres)
                 if (_filmCtx.Genre.Any(o => o.GenreId == g.GenreId))
+                {
                     _filmCtx.Genre.Attach(g);
+                    g.Film.Add(film);
+                }
 
             foreach (Director d in film.Directors)
                 if (_filmCtx.Directors.Any(o => o.DirectorId == d.DirectorId))
+                {
                     _filmCtx.Directors.Attach(d);
+                    d.Film.Add(film);
+                }
 
             if (_filmCtx.Rating.Any(o => o.Type == film.Rating.Type))
             {
@@ -61,11 +57,11 @@ namespace DAL
             if (_filmCtx.Status.Any(o => o.StatusName == film.Status.StatusName))
             {
                 film.Status = _filmCtx.Status.First(o => o.StatusName == film.Status.StatusName);
-                _filmCtx.Status.Attach(film.Status); 
+                _filmCtx.Status.Attach(film.Status);
             }
 
             _filmCtx.Films.Add(film);
-            
+
             _filmCtx.SaveChanges();
         }
 
@@ -89,14 +85,10 @@ namespace DAL
 
         public void AddCharacterActors(CharacterActors ca)
         {
-            //if (!_filmCtx.Actors.Any(o => o.ActorId == ca.ActorId))
-            //    this.AddActor(ca.Actor);
-            //if (!_filmCtx.Characters.Any(o => o.CharacterId == ca.CharacterId))
-            //    this.AddCharacter(ca.Character);
-
             _filmCtx.CharacterActors.Add(ca);
             _filmCtx.SaveChanges();
         }
+
         public void AddDirector(Director director)
         {
             if (!_filmCtx.Directors.Any(o => o.DirectorId == director.DirectorId))
@@ -104,12 +96,12 @@ namespace DAL
                 _filmCtx.Directors.Add(director);
                 _filmCtx.SaveChanges();
             }
-                
+
         }
 
         public void AddGenre(Genre genre)
         {
-            if(_filmCtx.Genre.Any(o => o.GenreId == genre.GenreId))
+            if (_filmCtx.Genre.Any(o => o.GenreId == genre.GenreId))
             {
                 Console.WriteLine("Exists !");
             }
@@ -119,14 +111,14 @@ namespace DAL
                 _filmCtx.Genre.Add(genre);
                 _filmCtx.SaveChanges();
             }
-            
+
         }
 
         public void AddComment(Comment comment)
         {
-            if(comment.Rate > 5 || comment.Rate < 0)
+            if (comment.Rate > 5 || comment.Rate < 0)
             {
-                
+
             }
             else
             {

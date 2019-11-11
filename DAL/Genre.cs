@@ -14,6 +14,7 @@ namespace DAL
         public int GenreId { get; set; }
         public string Name { get; set; }
 
+        public Genre() { }
 
         public Genre(string text)
         {

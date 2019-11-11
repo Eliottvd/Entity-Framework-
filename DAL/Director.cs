@@ -13,6 +13,7 @@ namespace DAL
         public int DirectorId { get; set; }
         public string DirectorName { get; set; }
 
+        public Director() { }
         public Director(string text)
         {
             string[] directordetail;

@@ -13,7 +13,6 @@ namespace DAL
         public string Name { get; set; }
 
         public Actor() { }
-
         public Actor(string[] acteurdetail)
         {
             ActorId = Int32.Parse(acteurdetail[0]);

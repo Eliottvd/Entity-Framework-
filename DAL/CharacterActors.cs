@@ -21,7 +21,7 @@ namespace DAL
         public virtual Actor Actor { get; set; }
         public virtual Film Film { get; set; }
 
-
+        public CharacterActors() { }
         public CharacterActors(Film f, Character c, Actor a)
         {
             CharacterId = c.CharacterId;
