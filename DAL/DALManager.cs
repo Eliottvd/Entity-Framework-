@@ -1,6 +1,7 @@
 ﻿using DAL;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -8,42 +9,62 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class DALManager: IDisposable
+    public class DALManager : IDisposable
     {
         private readonly FilmCtx _filmCtx;
 
         public DALManager(string connString)
         {
-            
             _filmCtx = new FilmCtx(connString);
             if (!_filmCtx.Database.Exists())
                 Console.WriteLine("Création de la base " + connString);
         }
-        
+
         public void AddFilm(Film film)
         {
-            //foreach (CharacterActors c in film.CharacterActors)
-            //    this.AddCharacterActors(c);
-            //foreach (Director d in film.Directors)
-            //    this.AddDirector(d);
+
+            foreach (CharacterActors ca in film.CharacterActors)
+            {
+                
+                if (_filmCtx.Characters.Any(o => o.CharacterName == ca.Character.CharacterName))
+                {
+                    ca.Character = _filmCtx.Characters.First(o => o.CharacterName == ca.Character.CharacterName);
+                    ca.CharacterId = ca.Character.CharacterId;
+                    // ATTACH BUG
+
+                    _filmCtx.Characters.Attach(ca.Character);
+
+                }
+            }
 
             foreach (Genre g in film.Genres)
                 if (_filmCtx.Genre.Any(o => o.GenreId == g.GenreId))
+                {
                     _filmCtx.Genre.Attach(g);
+                    g.Film.Add(film);
+                }
 
+            foreach (Director d in film.Directors)
+                if (_filmCtx.Directors.Any(o => o.DirectorId == d.DirectorId))
+                {
+                    _filmCtx.Directors.Attach(d);
+                    d.Film.Add(film);
+                }
 
-            //if (_filmCtx.Rating.Any(o => o.Type == film.Rating.Type))
-            //    _filmCtx.Rating.Attach(_filmCtx.Rating.First(o => o.Type == film.Rating.Type));
+            if (_filmCtx.Rating.Any(o => o.Type == film.Rating.Type))
+            {
+                film.Rating = _filmCtx.Rating.First(o => o.Type == film.Rating.Type);
+                _filmCtx.Rating.Attach(film.Rating);
+            }
 
             if (_filmCtx.Status.Any(o => o.StatusName == film.Status.StatusName))
             {
                 film.Status = _filmCtx.Status.First(o => o.StatusName == film.Status.StatusName);
-                _filmCtx.Status.Attach(film.Status); 
+                _filmCtx.Status.Attach(film.Status);
             }
 
-            // BUG SINCE ADDED Film TO COLLECTION IN Rating, Status, Director, etc
             _filmCtx.Films.Add(film);
-            
+
             _filmCtx.SaveChanges();
         }
 
@@ -67,14 +88,10 @@ namespace DAL
 
         public void AddCharacterActors(CharacterActors ca)
         {
-            //if (!_filmCtx.Actors.Any(o => o.ActorId == ca.ActorId))
-            //    this.AddActor(ca.Actor);
-            //if (!_filmCtx.Characters.Any(o => o.CharacterId == ca.CharacterId))
-            //    this.AddCharacter(ca.Character);
-
             _filmCtx.CharacterActors.Add(ca);
             _filmCtx.SaveChanges();
         }
+
         public void AddDirector(Director director)
         {
             if (!_filmCtx.Directors.Any(o => o.DirectorId == director.DirectorId))
@@ -82,12 +99,12 @@ namespace DAL
                 _filmCtx.Directors.Add(director);
                 _filmCtx.SaveChanges();
             }
-                
+
         }
 
         public void AddGenre(Genre genre)
         {
-            if(_filmCtx.Genre.Any(o => o.GenreId == genre.GenreId))
+            if (_filmCtx.Genre.Any(o => o.GenreId == genre.GenreId))
             {
                 Console.WriteLine("Exists !");
             }
@@ -97,14 +114,14 @@ namespace DAL
                 _filmCtx.Genre.Add(genre);
                 _filmCtx.SaveChanges();
             }
-            
+
         }
 
         public void AddComment(Comment comment)
         {
-            if(comment.Rate > 5 || comment.Rate < 0)
+            if (comment.Rate > 5 || comment.Rate < 0)
             {
-                
+
             }
             else
             {

@@ -82,8 +82,10 @@ namespace ConsoleApp
 
                         Actor a = new Actor(acteurdetail);
                         Character c = new Character(characterdetail[0]);
-
-                        f.CharacterActors.Add(new CharacterActors(f, c, a));
+                        CharacterActors ca = new CharacterActors(f, c, a);
+                        ca.Actor.CharacterActors.Add(ca);
+                        ca.Character.CharacterActors.Add(ca);
+                        f.CharacterActors.Add(ca);
                     }
             }
             return f;
