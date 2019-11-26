@@ -1,6 +1,7 @@
 ﻿using DAL;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -24,12 +25,14 @@ namespace DAL
 
             foreach (CharacterActors ca in film.CharacterActors)
             {
+                
                 if (_filmCtx.Characters.Any(o => o.CharacterName == ca.Character.CharacterName))
                 {
-                    ca.Character.CharacterId = _filmCtx.Characters.First(o => o.CharacterName == ca.Character.CharacterName).CharacterId;
+                    ca.Character = _filmCtx.Characters.First(o => o.CharacterName == ca.Character.CharacterName);
                     ca.CharacterId = ca.Character.CharacterId;
                     // ATTACH BUG
-                    //_filmCtx.Characters.Attach(ca.Character);
+
+                    _filmCtx.Characters.Attach(ca.Character);
 
                 }
             }
