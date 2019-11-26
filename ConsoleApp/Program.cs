@@ -50,8 +50,8 @@ namespace ConsoleApp
 
         private static void SaveFilmToDataBase(Film film)
         {
-            //using (var dal = new DALManager("name=FilmDB"))
-            using (var dal = new DALManager("TestDB"))
+            //using (var dal = new DALManager("TestDB"))
+            using (var dal = new DALManager("name=FilmDB"))
             {
                 dal.AddFilm(film);
             }
