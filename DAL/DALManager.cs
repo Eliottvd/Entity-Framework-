@@ -20,6 +20,13 @@ namespace DAL
                 Console.WriteLine("Création de la base " + connString);
         }
 
+        public DALManager(FilmCtx filmCtx)
+        {
+            _filmCtx = filmCtx;
+            if (!_filmCtx.Database.Exists())
+                Console.WriteLine("Création de la base ");
+        }
+
         public void AddFilm(Film film)
         {
 

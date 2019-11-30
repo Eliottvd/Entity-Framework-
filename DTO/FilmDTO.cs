@@ -14,12 +14,27 @@ namespace DTO
         public int Budget { get; set; }
         public string TagLine { get; set; }
         
-        public StatusDTO Status { get; set; }
+        public string Status { get; set; }
 
-        public RatingDTO Rating { get; set; }
+        public string Rating { get; set; }
 
         public FilmDTO()
         {
+        }
+
+        public String toString()
+        {
+            return "\nTitle : " + Title
+                    + "\nOriginal title : " + OriginalTitle
+                    + "\nRelease date : " + ReleaseDate
+                    + "\nVoteAverage : " + VoteAverage
+                    + "\nVoteCount : " + VoteCount
+                    + "\nRuntime : " + Runtime
+                    + "\nPosterpath : " + Posterpath
+                    + "\nTagLine : " + TagLine
+                    + "\nStatus : " + Status
+                    + "\nRating : " + Rating + "\n-----------------------------\n"
+                    ;
         }
     }
 }

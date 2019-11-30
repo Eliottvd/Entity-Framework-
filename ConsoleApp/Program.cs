@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BLL;
 using DAL;
+using DTO;
 
 namespace ConsoleApp
 {
@@ -13,6 +15,7 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
+            
             StreamReader f;
 
             if (System.Environment.MachineName == "LAPTOP-QHT69N73")
@@ -26,11 +29,27 @@ namespace ConsoleApp
                 System.Environment.Exit(1);
             }
 
-            for (int i =0; i < 100; i++)
+            for (int i =0; i < 10; i++)
             {
                 readAnddecodeline(f);
                 Console.WriteLine("Decoding line " + i);
             }
+
+
+            BLLManager bllM = new BLLManager("name=FilmDB");
+            List<FilmDTO> listFilmDTO = bllM.GetListByIdActor(5);
+            foreach (FilmDTO film in listFilmDTO)
+            {
+                Console.WriteLine(film.toString());
+            }
+
+            listFilmDTO = bllM.GetListByIdActor(2);
+            foreach (FilmDTO film in listFilmDTO)
+            {
+                Console.WriteLine(film.toString());
+            }
+
+            Console.ReadLine();
         }
 
         private static bool readAnddecodeline(StreamReader f)
