@@ -13,6 +13,8 @@ namespace DAL
     {
         private readonly FilmCtx _filmCtx;
 
+        public FilmCtx FilmCtx => _filmCtx;
+
         public DALManager(string connString)
         {
             _filmCtx = new FilmCtx(connString);
@@ -33,93 +35,93 @@ namespace DAL
             foreach (CharacterActors ca in film.CharacterActors)
             {
                 
-                if (_filmCtx.Characters.Any(o => o.CharacterName == ca.Character.CharacterName))
+                if (FilmCtx.Characters.Any(o => o.CharacterName == ca.Character.CharacterName))
                 {
-                    ca.Character = _filmCtx.Characters.First(o => o.CharacterName == ca.Character.CharacterName);
+                    ca.Character = FilmCtx.Characters.First(o => o.CharacterName == ca.Character.CharacterName);
                     ca.CharacterId = ca.Character.CharacterId;
                     // ATTACH BUG
 
-                    _filmCtx.Characters.Attach(ca.Character);
+                    FilmCtx.Characters.Attach(ca.Character);
 
                 }
             }
 
             foreach (Genre g in film.Genres)
-                if (_filmCtx.Genre.Any(o => o.GenreId == g.GenreId))
+                if (FilmCtx.Genre.Any(o => o.GenreId == g.GenreId))
                 {
-                    _filmCtx.Genre.Attach(g);
+                    FilmCtx.Genre.Attach(g);
                     g.Film.Add(film);
                 }
 
             foreach (Director d in film.Directors)
-                if (_filmCtx.Directors.Any(o => o.DirectorId == d.DirectorId))
+                if (FilmCtx.Directors.Any(o => o.DirectorId == d.DirectorId))
                 {
-                    _filmCtx.Directors.Attach(d);
+                    FilmCtx.Directors.Attach(d);
                     d.Film.Add(film);
                 }
 
-            if (_filmCtx.Rating.Any(o => o.Type == film.Rating.Type))
+            if (FilmCtx.Rating.Any(o => o.Type == film.Rating.Type))
             {
-                film.Rating = _filmCtx.Rating.First(o => o.Type == film.Rating.Type);
-                _filmCtx.Rating.Attach(film.Rating);
+                film.Rating = FilmCtx.Rating.First(o => o.Type == film.Rating.Type);
+                FilmCtx.Rating.Attach(film.Rating);
             }
 
-            if (_filmCtx.Status.Any(o => o.StatusName == film.Status.StatusName))
+            if (FilmCtx.Status.Any(o => o.StatusName == film.Status.StatusName))
             {
-                film.Status = _filmCtx.Status.First(o => o.StatusName == film.Status.StatusName);
-                _filmCtx.Status.Attach(film.Status);
+                film.Status = FilmCtx.Status.First(o => o.StatusName == film.Status.StatusName);
+                FilmCtx.Status.Attach(film.Status);
             }
 
-            _filmCtx.Films.Add(film);
+            FilmCtx.Films.Add(film);
 
-            _filmCtx.SaveChanges();
+            FilmCtx.SaveChanges();
         }
 
         public void AddCharacter(Character character)
         {
-            if (!_filmCtx.Characters.Any(o => o.CharacterId == character.CharacterId))
+            if (!FilmCtx.Characters.Any(o => o.CharacterId == character.CharacterId))
             {
-                _filmCtx.Characters.Add(character);
-                _filmCtx.SaveChanges();
+                FilmCtx.Characters.Add(character);
+                FilmCtx.SaveChanges();
             }
         }
 
         public void AddActor(Actor actor)
         {
-            if (!_filmCtx.Actors.Any(o => o.ActorId == actor.ActorId))
+            if (!FilmCtx.Actors.Any(o => o.ActorId == actor.ActorId))
             {
-                _filmCtx.Actors.Add(actor);
-                _filmCtx.SaveChanges();
+                FilmCtx.Actors.Add(actor);
+                FilmCtx.SaveChanges();
             }
         }
 
         public void AddCharacterActors(CharacterActors ca)
         {
-            _filmCtx.CharacterActors.Add(ca);
-            _filmCtx.SaveChanges();
+            FilmCtx.CharacterActors.Add(ca);
+            FilmCtx.SaveChanges();
         }
 
         public void AddDirector(Director director)
         {
-            if (!_filmCtx.Directors.Any(o => o.DirectorId == director.DirectorId))
+            if (!FilmCtx.Directors.Any(o => o.DirectorId == director.DirectorId))
             {
-                _filmCtx.Directors.Add(director);
-                _filmCtx.SaveChanges();
+                FilmCtx.Directors.Add(director);
+                FilmCtx.SaveChanges();
             }
 
         }
 
         public void AddGenre(Genre genre)
         {
-            if (_filmCtx.Genre.Any(o => o.GenreId == genre.GenreId))
+            if (FilmCtx.Genre.Any(o => o.GenreId == genre.GenreId))
             {
                 Console.WriteLine("Exists !");
             }
             else
             {
                 Console.WriteLine("Doesnt Exists !");
-                _filmCtx.Genre.Add(genre);
-                _filmCtx.SaveChanges();
+                FilmCtx.Genre.Add(genre);
+                FilmCtx.SaveChanges();
             }
 
         }
@@ -132,14 +134,29 @@ namespace DAL
             }
             else
             {
-                _filmCtx.Comments.Add(comment);
-                _filmCtx.SaveChanges();
+                FilmCtx.Comments.Add(comment);
+                FilmCtx.SaveChanges();
             }
+        }
+
+        public List<Film> getAllMovies()
+        {
+            return FilmCtx.Films.ToList();
+        }
+
+        public List<Actor> getActor()
+        {
+            return FilmCtx.Actors.ToList();
+        }
+
+        public List<CharacterActors> getCharacterActor()
+        {
+            return FilmCtx.CharacterActors.ToList();
         }
 
         public void Dispose()
         {
-            _filmCtx.Dispose();
+            FilmCtx.Dispose();
         }
     }
 }

@@ -37,16 +37,19 @@ namespace ConsoleApp
 
 
             BLLManager bllM = new BLLManager("name=FilmDB");
-            List<FilmDTO> listFilmDTO = bllM.GetListByIdActor(5);
+            
+            List <FilmDTO> listFilmDTO = bllM.FindListFilmByPartialActorName("ikko");
+            List <CharacterDTO> listCharacterDTO;
             foreach (FilmDTO film in listFilmDTO)
             {
                 Console.WriteLine(film.toString());
             }
 
-            listFilmDTO = bllM.GetListByIdActor(2);
-            foreach (FilmDTO film in listFilmDTO)
+            listCharacterDTO = bllM.GetListCharacterByIdActorAndIdFilm(1, 2);
+
+            foreach (CharacterDTO chara in listCharacterDTO)
             {
-                Console.WriteLine(film.toString());
+                Console.WriteLine(chara.Name);
             }
 
             Console.ReadLine();
