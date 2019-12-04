@@ -16,7 +16,7 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            /*
+            
             StreamReader f;
 
             if (System.Environment.MachineName == "LAPTOP-QHT69N73")
@@ -35,23 +35,23 @@ namespace ConsoleApp
                 readAnddecodeline(f);
                 Console.WriteLine("Decoding line " + i);
             }
-            */
-
-            BLLManager bllM = new BLLManager("name=FilmDB");
             
-            List <FilmDTO> listFilmDTO = bllM.FindListFilmByPartialActorName("ikko");
-            List <CharacterDTO> listCharacterDTO;
-            foreach (FilmDTO film in listFilmDTO)
-            {
-                Console.WriteLine(film.toString());
-            }
 
-            listCharacterDTO = bllM.GetListCharacterByIdActorAndIdFilm(1, 2);
+            //BLLManager bllM = new BLLManager("name=FilmDB");
+            
+            //List <FilmDTO> listFilmDTO = bllM.FindListFilmByPartialActorName("ikko");
+            //List <CharacterDTO> listCharacterDTO;
+            //foreach (FilmDTO film in listFilmDTO)
+            //{
+            //    Console.WriteLine(film.toString());
+            //}
 
-            foreach (CharacterDTO chara in listCharacterDTO)
-            {
-                Console.WriteLine(chara.Name);
-            }
+            //listCharacterDTO = bllM.GetListCharacterByIdActorAndIdFilm(1, 2);
+
+            //foreach (CharacterDTO chara in listCharacterDTO)
+            //{
+            //    Console.WriteLine(chara.Name);
+            //}
 
             Console.ReadLine();
         }

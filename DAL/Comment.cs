@@ -15,7 +15,7 @@ namespace DAL
         public DateTime? Date { get; set; }
 
 
-        public Film Film { get; set; }
+        public Actor Actor { get; set; }
     }
 
 

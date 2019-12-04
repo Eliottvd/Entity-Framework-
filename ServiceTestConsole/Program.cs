@@ -1,10 +1,10 @@
 ﻿using DTO;
+using ServiceTestConsole.ServiceReference1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WcfService;
 
 namespace ServiceTestConsole
 {
@@ -12,11 +12,12 @@ namespace ServiceTestConsole
     {
         static void Main(string[] args)
         {
-            Service1 ser = new Service1();
-            
+            Service1Client ser = new Service1Client();
+
             ConsoleKeyInfo rep;
-            List<FilmDTO> filmDTOs;
-            List<CharacterDTO> characterDTOs;
+
+            FilmDTO[] filmDTOs;
+            CharacterDTO[] characterDTOs;
             FullActorDTO fullAct;
             do
             {
@@ -32,7 +33,8 @@ namespace ServiceTestConsole
                 switch(rep.Key)
                 {
                     case ConsoleKey.NumPad1:
-                        filmDTOs = ser.FindListFilmByPartialActorName("wil");
+                        Console.WriteLine("Partial actor name : ");
+                        filmDTOs = ser.FindListFilmByPartialActorName(Console.ReadLine());
                         foreach (FilmDTO f in filmDTOs)
                         {
                             Console.WriteLine(f.toString());
@@ -41,31 +43,65 @@ namespace ServiceTestConsole
                         break;
 
                     case ConsoleKey.NumPad2:
-                        filmDTOs = ser.GetListFilmsByIdActor(2);
-                        foreach (FilmDTO f in filmDTOs)
+                        Console.WriteLine("Actor Id : ");
+                        try
                         {
-                            Console.WriteLine(f.toString());
+                            filmDTOs = ser.GetListFilmsByIdActor(Int32.Parse(Console.ReadLine()));
+                            foreach (FilmDTO f in filmDTOs)
+                            {
+                                Console.WriteLine(f.toString());
+                            }
                         }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Unable to parse ");
+                        }
+
+                        
 
                         break;
 
                     case ConsoleKey.NumPad3:
-                        fullAct = ser.GetFullActorDetailsByIdActor(2);
-                        Console.WriteLine(fullAct.ActorId + fullAct.Name);
+                        Console.WriteLine("Actor Id : ");
+                        try
+                        {
+                            fullAct = ser.GetFullActorDetailsByIdActor(Int32.Parse(Console.ReadLine()));
+                            Console.WriteLine(fullAct.ActorId + fullAct.Name);
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Unable to parse ");
+                        }
+                        
 
                         break;
 
                     case ConsoleKey.NumPad4:
-                        characterDTOs = ser.GetListCharacterByIdActorAndIdFilm(1, 2);
-                        foreach (CharacterDTO charac in characterDTOs)
+                        int ActorId, IdFilm;
+                        try
                         {
-                            Console.WriteLine(charac.CharacterId+charac.Name);
+                            Console.WriteLine("Actor Id : ");
+                            ActorId = Int32.Parse(Console.ReadLine());
+                            Console.WriteLine("Film Id : ");
+                            IdFilm = Int32.Parse(Console.ReadLine());
+                            characterDTOs = ser.GetListCharacterByIdActorAndIdFilm(IdFilm, ActorId);
+                            foreach (CharacterDTO charac in characterDTOs)
+                            {
+                                Console.WriteLine(charac.CharacterId + charac.Name);
+                            }
                         }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Unable to parse ");
+                        }
+                        
 
                         break;
                 }
 
             } while (rep.Key != ConsoleKey.NumPad5);
+
+            ser.Close();
         }
     }
 }

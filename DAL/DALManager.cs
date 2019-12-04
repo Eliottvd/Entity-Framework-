@@ -34,7 +34,13 @@ namespace DAL
 
             foreach (CharacterActors ca in film.CharacterActors)
             {
-                
+
+
+                //if (FilmCtx.Actors.Any(o => o.ActorId == ca.Actor.ActorId))
+                //{
+                //    ca.ActorId = ca.Actor.ActorId;
+                //    FilmCtx.Actors.Attach(ca.Actor);
+                //}
                 if (FilmCtx.Characters.Any(o => o.CharacterName == ca.Character.CharacterName))
                 {
                     ca.Character = FilmCtx.Characters.First(o => o.CharacterName == ca.Character.CharacterName);
