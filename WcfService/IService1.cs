@@ -29,7 +29,7 @@ namespace WcfService
         FullActorDTO GetFullActorDetailsByIdActor(int i);
 
         [OperationContract]
-        void InsertCommentOnActorId(CommentDTO comment);
+        void InsertCommentOnActorId(CommentDTO comment, int ActorId);
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);

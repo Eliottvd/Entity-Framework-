@@ -109,10 +109,10 @@ namespace ServiceTestConsole.ServiceReference1 {
         System.Threading.Tasks.Task<DTO.FullActorDTO> GetFullActorDetailsByIdActorAsync(int i);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/InsertCommentOnActorId", ReplyAction="http://tempuri.org/IService1/InsertCommentOnActorIdResponse")]
-        void InsertCommentOnActorId(DTO.CommentDTO comment);
+        void InsertCommentOnActorId(DTO.CommentDTO comment, int ActorId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/InsertCommentOnActorId", ReplyAction="http://tempuri.org/IService1/InsertCommentOnActorIdResponse")]
-        System.Threading.Tasks.Task InsertCommentOnActorIdAsync(DTO.CommentDTO comment);
+        System.Threading.Tasks.Task InsertCommentOnActorIdAsync(DTO.CommentDTO comment, int ActorId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
         ServiceTestConsole.ServiceReference1.CompositeType GetDataUsingDataContract(ServiceTestConsole.ServiceReference1.CompositeType composite);
@@ -188,12 +188,12 @@ namespace ServiceTestConsole.ServiceReference1 {
             return base.Channel.GetFullActorDetailsByIdActorAsync(i);
         }
         
-        public void InsertCommentOnActorId(DTO.CommentDTO comment) {
-            base.Channel.InsertCommentOnActorId(comment);
+        public void InsertCommentOnActorId(DTO.CommentDTO comment, int ActorId) {
+            base.Channel.InsertCommentOnActorId(comment, ActorId);
         }
         
-        public System.Threading.Tasks.Task InsertCommentOnActorIdAsync(DTO.CommentDTO comment) {
-            return base.Channel.InsertCommentOnActorIdAsync(comment);
+        public System.Threading.Tasks.Task InsertCommentOnActorIdAsync(DTO.CommentDTO comment, int ActorId) {
+            return base.Channel.InsertCommentOnActorIdAsync(comment, ActorId);
         }
         
         public ServiceTestConsole.ServiceReference1.CompositeType GetDataUsingDataContract(ServiceTestConsole.ServiceReference1.CompositeType composite) {

@@ -62,9 +62,9 @@ namespace WcfService
             return bllManager.GetFullActorDetailsByIdActor(i);
         }
 
-        public void InsertCommentOnActorId(CommentDTO comment)
+        public void InsertCommentOnActorId(CommentDTO comment, int ActorId)
         {
-            bllManager.InsertCommentOnActorId(comment);
+            bllManager.InsertCommentOnActorId(comment, ActorId);
         }
     }
 }

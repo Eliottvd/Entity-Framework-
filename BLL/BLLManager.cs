@@ -180,17 +180,21 @@ namespace BLL
             return FullActeur;
         }
 
-        public void InsertCommentOnActorId(CommentDTO comment)
+        public void InsertCommentOnActorId(CommentDTO comment, int actorId)
         {
+            Actor acteur = dalM.FilmCtx.Actors.Find(actorId);
+            
             try
             {
                 Comment c = new Comment()
                 {
+                    Actor = acteur,
                     Rate = comment.Rate,
                     Avatar = comment.Avatar,
                     Content = comment.Content,
                     Date = comment.Date
                 };
+                acteur.Comments.Add(c);
 
                 dalM.AddComment(c);
             }
@@ -198,6 +202,7 @@ namespace BLL
             {
                 Console.WriteLine("Exception: " + e.Message);
             }
+
         }
     }
 }

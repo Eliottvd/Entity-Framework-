@@ -27,7 +27,8 @@ namespace ServiceTestConsole
                 Console.WriteLine("2/Get list film by id actor");
                 Console.WriteLine("3/Get full actor detail by id actor");
                 Console.WriteLine("4/Get character by id actor and id film");
-                Console.WriteLine("5/Exit");
+                Console.WriteLine("5/Insert commment on actorId");
+                Console.WriteLine("6/Exit");
                 rep = Console.ReadKey();
                 Console.WriteLine("\nProcessing...\n");
                 switch(rep.Key)
@@ -97,9 +98,22 @@ namespace ServiceTestConsole
                         
 
                         break;
+
+                    case ConsoleKey.NumPad5:
+                        CommentDTO com = new CommentDTO
+                        {
+                            Content = "testContent",
+                            Rate = 3,
+                            Avatar = "avatarString",
+                            Date = new DateTime()
+
+                        };
+
+                        ser.InsertCommentOnActorId(com, 2);
+                        break;
                 }
 
-            } while (rep.Key != ConsoleKey.NumPad5);
+            } while (rep.Key != ConsoleKey.NumPad6);
 
             ser.Close();
         }
