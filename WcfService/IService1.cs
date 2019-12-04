@@ -32,9 +32,6 @@ namespace WcfService
         void InsertCommentOnActorId(CommentDTO comment);
 
         [OperationContract]
-        int GetIdActorByName(string n);
-
-        [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
     }
 

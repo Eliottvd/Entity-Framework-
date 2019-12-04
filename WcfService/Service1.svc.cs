@@ -66,10 +66,5 @@ namespace WcfService
         {
             bllManager.InsertCommentOnActorId(comment);
         }
-
-        public int GetIdActorByName(string n)
-        {
-            return GetIdActorByName(n);
-        }
     }
 }

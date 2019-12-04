@@ -121,7 +121,8 @@ namespace BLL
                 {
                     tmp = new CharacterDTO
                     {
-                        Name = ca.Character.CharacterName
+                        Name = ca.Character.CharacterName,
+                        CharacterId = ca.Character.CharacterId
                     };
                     characterDTOs.Add(tmp);
                 }

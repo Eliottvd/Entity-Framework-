@@ -16,7 +16,7 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            
+            /*
             StreamReader f;
 
             if (System.Environment.MachineName == "LAPTOP-QHT69N73")
@@ -35,7 +35,7 @@ namespace ConsoleApp
                 readAnddecodeline(f);
                 Console.WriteLine("Decoding line " + i);
             }
-
+            */
 
             BLLManager bllM = new BLLManager("name=FilmDB");
             
