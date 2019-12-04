@@ -21,6 +21,13 @@ namespace BLL
             Console.WriteLine("DAL crée");
         }
 
+        public BLLManager()
+        {
+            _filmCtx = new FilmCtx("name=FilmDB");
+            dalM = new DALManager(_filmCtx);
+            Console.WriteLine("DAL crée");
+        }
+
         public List<FilmDTO> GetListFilmsByIdActor(int id)
         {
             List<FilmDTO> filmDTOs = new List<FilmDTO>();

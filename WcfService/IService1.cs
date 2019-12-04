@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using DTO;
 
 namespace WcfService
 {
@@ -12,14 +13,29 @@ namespace WcfService
     [ServiceContract]
     public interface IService1
     {
-
         [OperationContract]
         string GetData(int value);
 
         [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
+        List<FilmDTO> GetListFilmsByIdActor(int id);
 
-        // TODO: Add your service operations here
+        [OperationContract]
+        List<CharacterDTO> GetListCharacterByIdActorAndIdFilm(int idfilm, int idactor);
+
+        [OperationContract]
+        List<FilmDTO> FindListFilmByPartialActorName(String nomActor);
+
+        [OperationContract]
+        FullActorDTO GetFullActorDetailsByIdActor(int i);
+
+        [OperationContract]
+        void InsertCommentOnActorId(CommentDTO comment);
+
+        [OperationContract]
+        int GetIdActorByName(string n);
+
+        [OperationContract]
+        CompositeType GetDataUsingDataContract(CompositeType composite);
     }
 
 
