@@ -13,6 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfService", "WcfService\WcfService.csproj", "{7179415D-30D1-4527-B182-CF76167C963C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceTestConsole", "ServiceTestConsole\ServiceTestConsole.csproj", "{16371C08-BAE2-468B-A2B2-DAD46B241ACF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7179415D-30D1-4527-B182-CF76167C963C} = {7179415D-30D1-4527-B182-CF76167C963C}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +44,10 @@ Global
 		{7179415D-30D1-4527-B182-CF76167C963C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7179415D-30D1-4527-B182-CF76167C963C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7179415D-30D1-4527-B182-CF76167C963C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16371C08-BAE2-468B-A2B2-DAD46B241ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16371C08-BAE2-468B-A2B2-DAD46B241ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16371C08-BAE2-468B-A2B2-DAD46B241ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16371C08-BAE2-468B-A2B2-DAD46B241ACF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

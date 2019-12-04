@@ -147,7 +147,7 @@ namespace BLL
 
         public FullActorDTO GetFullActorDetailsByIdActor(int idActor)
         {
-            Actor acteur = dalM.FilmCtx.Actors.First(a => a.ActorId == idActor);
+            Actor acteur = dalM.FilmCtx.Actors.Find(idActor);
             FullActorDTO FullActeur = new FullActorDTO();
             FullActeur.ActorId = acteur.ActorId;
             FullActeur.Name = acteur.Name;

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using BLL;
 using DAL;
 using DTO;
+using WcfService;
 
 namespace ConsoleApp
 {
