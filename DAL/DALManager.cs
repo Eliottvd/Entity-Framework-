@@ -137,11 +137,7 @@ namespace DAL
 
         public void AddComment(Comment comment)
         {
-            if (comment.Rate > 5 || comment.Rate < 0)
-            {
-
-            }
-            else
+            if (comment.Rate >= 0 && comment.Rate <= 5)
             {
                 try
                 {
