@@ -104,8 +104,7 @@ namespace ServiceTestConsole
                         {
                             Content = "testContent",
                             Rate = 3,
-                            Avatar = "avatarString",
-                            Date = new DateTime()
+                            Avatar = "avatarString"
 
                         };
 

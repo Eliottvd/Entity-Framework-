@@ -9,7 +9,7 @@ namespace DAL
 {
     public class Actor
     {
-        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ActorId { get; set; }
         public string Name { get; set; }
 

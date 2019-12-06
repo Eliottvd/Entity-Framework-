@@ -13,8 +13,10 @@ namespace DAL
         public float Rate { get; set; } 
         public string Avatar { get; set; }
         public DateTime? Date { get; set; }
-
-
+        public Comment()
+        {
+            
+        }
         public Actor Actor { get; set; }
     }
 

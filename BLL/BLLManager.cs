@@ -184,24 +184,19 @@ namespace BLL
         {
             Actor acteur = dalM.FilmCtx.Actors.Find(actorId);
             
-            try
-            {
                 Comment c = new Comment()
                 {
                     Actor = acteur,
                     Rate = comment.Rate,
                     Avatar = comment.Avatar,
                     Content = comment.Content,
-                    Date = comment.Date
+                    Date = DateTime.Now
                 };
-                acteur.Comments.Add(c);
+                //acteur.Comments.Add(c);
+                
 
                 dalM.AddComment(c);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception: " + e.Message);
-            }
+
 
         }
     }

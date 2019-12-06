@@ -31,23 +31,27 @@ namespace DAL
 
         public void AddFilm(Film film)
         {
-            
             foreach (CharacterActors ca in film.CharacterActors)
             {
-                //if (FilmCtx.Actors.Any(o => o.ActorId == ca.Actor.ActorId))
-                //{
-                //    ca.ActorId = ca.Actor.ActorId;
-                //    FilmCtx.Actors.Attach(ca.Actor);
-                //}
+                // Actors duplicates
+                if (FilmCtx.Actors.Any(o => o.ActorId == ca.Actor.ActorId))
+                {
+                    ca.Actor = FilmCtx.Actors.First(o => o.ActorId == ca.ActorId);
+                }
+                else if (film.CharacterActors.Any(o => o.ActorId == ca.Actor.ActorId))
+                {
+                    ca.Actor = film.CharacterActors.First(o => o.ActorId == ca.ActorId).Actor;
+                }
 
+                // Characters duplicates
                 if (FilmCtx.Characters.Any(o => o.CharacterName == ca.Character.CharacterName))
                 {
                     ca.Character = FilmCtx.Characters.First(o => o.CharacterName == ca.Character.CharacterName);
                     ca.CharacterId = ca.Character.CharacterId;
-                    // ATTACH BUG
-
-                    FilmCtx.Characters.Attach(ca.Character);
-
+                }
+                else if (film.CharacterActors.Any(o => o.Character.CharacterName == ca.Character.CharacterName))
+                {
+                    ca.Character = film.CharacterActors.First(o => o.Character.CharacterName == ca.Character.CharacterName).Character;
                 }
             }
 
@@ -139,8 +143,16 @@ namespace DAL
             }
             else
             {
-                FilmCtx.Comments.Add(comment);
-                FilmCtx.SaveChanges();
+                try
+                {
+                    FilmCtx.Comments.Add(comment);
+                    FilmCtx.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Exception: " + e.Message);
+                }
+
             }
         }
 
