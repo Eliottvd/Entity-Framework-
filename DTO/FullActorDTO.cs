@@ -8,6 +8,8 @@ namespace DTO
 {
     public class FullActorDTO : ActorDTO
     {
+        public List<String> Films { get; set; }
+        public List<String> Characters { get; set; }
         public FullActorDTO()
         {
 

@@ -21,5 +21,7 @@ namespace DAL
         }
 
         public virtual ICollection<CharacterActors> CharacterActors { get; set; }
+        public virtual ICollection<Film> Films { get; set; }
+        public virtual ICollection<Actor> Actors { get; set; }
     }
 }

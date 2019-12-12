@@ -36,6 +36,8 @@ namespace DAL
         }
 
         public virtual ICollection<CharacterActors> CharacterActors { get; set; }
+        public virtual ICollection<Actor> Actors { get; set; }
+        public virtual ICollection<Character> Characters { get; set; }
         public virtual ICollection<Genre> Genres { get; set; }
         public virtual ICollection<Director> Directors { get; set; }
     }

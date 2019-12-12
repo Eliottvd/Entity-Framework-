@@ -23,6 +23,8 @@ namespace DAL
         }
 
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Film> Films { get; set; }
+        public virtual ICollection<Character> Characters { get; set; }
         public virtual ICollection<CharacterActors> CharacterActors { get; set; }
     }
 }
