@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="ActorViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -106,18 +107,16 @@
     <None Include="Connected Services\ServiceReference1\Service13.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceReference1\WpfApp.ServiceReference1.CharacterDTO.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
+    <None Include="Connected Services\ServiceReference1\Service14.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceReference1\WpfApp.ServiceReference1.CompositeType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ServiceReference1\WpfApp.ServiceReference1.FilmDTO.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceReference1\WpfApp.ServiceReference1.FullActorDTO.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
+    <None Include="Properties\DataSources\DTO.ActorDTO.datasource" />
+    <None Include="Properties\DataSources\DTO.CharacterDTO.datasource" />
+    <None Include="Properties\DataSources\DTO.FilmDTO.datasource" />
+    <None Include="Properties\DataSources\DTO.FullActorDTO.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -128,6 +127,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{7caef39a-5982-488c-b4ab-11fb56eea6cc}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceReference1\" />

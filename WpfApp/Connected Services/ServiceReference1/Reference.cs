@@ -15,434 +15,6 @@ namespace WpfApp.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FilmDTO", Namespace="http://schemas.datacontract.org/2004/07/DTO")]
-    [System.SerializableAttribute()]
-    public partial class FilmDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int BudgetField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string OriginalTitleField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PosterpathField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string RatingField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.DateTime> ReleaseDateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int RuntimeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StatusField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TagLineField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TitleField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private float VoteAverageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int VoteCountField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Budget {
-            get {
-                return this.BudgetField;
-            }
-            set {
-                if ((this.BudgetField.Equals(value) != true)) {
-                    this.BudgetField = value;
-                    this.RaisePropertyChanged("Budget");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string OriginalTitle {
-            get {
-                return this.OriginalTitleField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.OriginalTitleField, value) != true)) {
-                    this.OriginalTitleField = value;
-                    this.RaisePropertyChanged("OriginalTitle");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Posterpath {
-            get {
-                return this.PosterpathField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PosterpathField, value) != true)) {
-                    this.PosterpathField = value;
-                    this.RaisePropertyChanged("Posterpath");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Rating {
-            get {
-                return this.RatingField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RatingField, value) != true)) {
-                    this.RatingField = value;
-                    this.RaisePropertyChanged("Rating");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.DateTime> ReleaseDate {
-            get {
-                return this.ReleaseDateField;
-            }
-            set {
-                if ((this.ReleaseDateField.Equals(value) != true)) {
-                    this.ReleaseDateField = value;
-                    this.RaisePropertyChanged("ReleaseDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Runtime {
-            get {
-                return this.RuntimeField;
-            }
-            set {
-                if ((this.RuntimeField.Equals(value) != true)) {
-                    this.RuntimeField = value;
-                    this.RaisePropertyChanged("Runtime");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Status {
-            get {
-                return this.StatusField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
-                    this.StatusField = value;
-                    this.RaisePropertyChanged("Status");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TagLine {
-            get {
-                return this.TagLineField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TagLineField, value) != true)) {
-                    this.TagLineField = value;
-                    this.RaisePropertyChanged("TagLine");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Title {
-            get {
-                return this.TitleField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
-                    this.TitleField = value;
-                    this.RaisePropertyChanged("Title");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public float VoteAverage {
-            get {
-                return this.VoteAverageField;
-            }
-            set {
-                if ((this.VoteAverageField.Equals(value) != true)) {
-                    this.VoteAverageField = value;
-                    this.RaisePropertyChanged("VoteAverage");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int VoteCount {
-            get {
-                return this.VoteCountField;
-            }
-            set {
-                if ((this.VoteCountField.Equals(value) != true)) {
-                    this.VoteCountField = value;
-                    this.RaisePropertyChanged("VoteCount");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CharacterDTO", Namespace="http://schemas.datacontract.org/2004/07/DTO")]
-    [System.SerializableAttribute()]
-    public partial class CharacterDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int CharacterIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CharacterId {
-            get {
-                return this.CharacterIdField;
-            }
-            set {
-                if ((this.CharacterIdField.Equals(value) != true)) {
-                    this.CharacterIdField = value;
-                    this.RaisePropertyChanged("CharacterId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ActorDTO", Namespace="http://schemas.datacontract.org/2004/07/DTO")]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WpfApp.ServiceReference1.FullActorDTO))]
-    public partial class ActorDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ActorIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ActorId {
-            get {
-                return this.ActorIdField;
-            }
-            set {
-                if ((this.ActorIdField.Equals(value) != true)) {
-                    this.ActorIdField = value;
-                    this.RaisePropertyChanged("ActorId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FullActorDTO", Namespace="http://schemas.datacontract.org/2004/07/DTO")]
-    [System.SerializableAttribute()]
-    public partial class FullActorDTO : WpfApp.ServiceReference1.ActorDTO {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CommentDTO", Namespace="http://schemas.datacontract.org/2004/07/DTO")]
-    [System.SerializableAttribute()]
-    public partial class CommentDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AvatarField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ContentField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.DateTime> DateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private float RateField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Avatar {
-            get {
-                return this.AvatarField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AvatarField, value) != true)) {
-                    this.AvatarField = value;
-                    this.RaisePropertyChanged("Avatar");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Content {
-            get {
-                return this.ContentField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ContentField, value) != true)) {
-                    this.ContentField = value;
-                    this.RaisePropertyChanged("Content");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.DateTime> Date {
-            get {
-                return this.DateField;
-            }
-            set {
-                if ((this.DateField.Equals(value) != true)) {
-                    this.DateField = value;
-                    this.RaisePropertyChanged("Date");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public float Rate {
-            get {
-                return this.RateField;
-            }
-            set {
-                if ((this.RateField.Equals(value) != true)) {
-                    this.RateField = value;
-                    this.RaisePropertyChanged("Rate");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CompositeType", Namespace="http://schemas.datacontract.org/2004/07/WcfService")]
     [System.SerializableAttribute()]
     public partial class CompositeType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -513,40 +85,46 @@ namespace WpfApp.ServiceReference1 {
         System.Threading.Tasks.Task<string> GetDataAsync(int value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetListFilmsByIdActor", ReplyAction="http://tempuri.org/IService1/GetListFilmsByIdActorResponse")]
-        WpfApp.ServiceReference1.FilmDTO[] GetListFilmsByIdActor(int id);
+        DTO.FilmDTO[] GetListFilmsByIdActor(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetListFilmsByIdActor", ReplyAction="http://tempuri.org/IService1/GetListFilmsByIdActorResponse")]
-        System.Threading.Tasks.Task<WpfApp.ServiceReference1.FilmDTO[]> GetListFilmsByIdActorAsync(int id);
+        System.Threading.Tasks.Task<DTO.FilmDTO[]> GetListFilmsByIdActorAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetListCharacterByIdActorAndIdFilm", ReplyAction="http://tempuri.org/IService1/GetListCharacterByIdActorAndIdFilmResponse")]
-        WpfApp.ServiceReference1.CharacterDTO[] GetListCharacterByIdActorAndIdFilm(int idfilm, int idactor);
+        DTO.CharacterDTO[] GetListCharacterByIdActorAndIdFilm(int idfilm, int idactor);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetListCharacterByIdActorAndIdFilm", ReplyAction="http://tempuri.org/IService1/GetListCharacterByIdActorAndIdFilmResponse")]
-        System.Threading.Tasks.Task<WpfApp.ServiceReference1.CharacterDTO[]> GetListCharacterByIdActorAndIdFilmAsync(int idfilm, int idactor);
+        System.Threading.Tasks.Task<DTO.CharacterDTO[]> GetListCharacterByIdActorAndIdFilmAsync(int idfilm, int idactor);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/FindListFilmByPartialActorName", ReplyAction="http://tempuri.org/IService1/FindListFilmByPartialActorNameResponse")]
-        WpfApp.ServiceReference1.FilmDTO[] FindListFilmByPartialActorName(string nomActor);
+        DTO.FilmDTO[] FindListFilmByPartialActorName(string nomActor);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/FindListFilmByPartialActorName", ReplyAction="http://tempuri.org/IService1/FindListFilmByPartialActorNameResponse")]
-        System.Threading.Tasks.Task<WpfApp.ServiceReference1.FilmDTO[]> FindListFilmByPartialActorNameAsync(string nomActor);
+        System.Threading.Tasks.Task<DTO.FilmDTO[]> FindListFilmByPartialActorNameAsync(string nomActor);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetFullActorDetailsByIdActor", ReplyAction="http://tempuri.org/IService1/GetFullActorDetailsByIdActorResponse")]
-        WpfApp.ServiceReference1.FullActorDTO GetFullActorDetailsByIdActor(int i);
+        DTO.FullActorDTO GetFullActorDetailsByIdActor(int i);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetFullActorDetailsByIdActor", ReplyAction="http://tempuri.org/IService1/GetFullActorDetailsByIdActorResponse")]
-        System.Threading.Tasks.Task<WpfApp.ServiceReference1.FullActorDTO> GetFullActorDetailsByIdActorAsync(int i);
+        System.Threading.Tasks.Task<DTO.FullActorDTO> GetFullActorDetailsByIdActorAsync(int i);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/InsertCommentOnActorId", ReplyAction="http://tempuri.org/IService1/InsertCommentOnActorIdResponse")]
-        void InsertCommentOnActorId(WpfApp.ServiceReference1.CommentDTO comment, int ActorId);
+        void InsertCommentOnActorId(DTO.CommentDTO comment, int ActorId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/InsertCommentOnActorId", ReplyAction="http://tempuri.org/IService1/InsertCommentOnActorIdResponse")]
-        System.Threading.Tasks.Task InsertCommentOnActorIdAsync(WpfApp.ServiceReference1.CommentDTO comment, int ActorId);
+        System.Threading.Tasks.Task InsertCommentOnActorIdAsync(DTO.CommentDTO comment, int ActorId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
         WpfApp.ServiceReference1.CompositeType GetDataUsingDataContract(WpfApp.ServiceReference1.CompositeType composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
         System.Threading.Tasks.Task<WpfApp.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(WpfApp.ServiceReference1.CompositeType composite);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllActors", ReplyAction="http://tempuri.org/IService1/GetAllActorsResponse")]
+        DTO.ActorDTO[] GetAllActors();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllActors", ReplyAction="http://tempuri.org/IService1/GetAllActorsResponse")]
+        System.Threading.Tasks.Task<DTO.ActorDTO[]> GetAllActorsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -584,43 +162,43 @@ namespace WpfApp.ServiceReference1 {
             return base.Channel.GetDataAsync(value);
         }
         
-        public WpfApp.ServiceReference1.FilmDTO[] GetListFilmsByIdActor(int id) {
+        public DTO.FilmDTO[] GetListFilmsByIdActor(int id) {
             return base.Channel.GetListFilmsByIdActor(id);
         }
         
-        public System.Threading.Tasks.Task<WpfApp.ServiceReference1.FilmDTO[]> GetListFilmsByIdActorAsync(int id) {
+        public System.Threading.Tasks.Task<DTO.FilmDTO[]> GetListFilmsByIdActorAsync(int id) {
             return base.Channel.GetListFilmsByIdActorAsync(id);
         }
         
-        public WpfApp.ServiceReference1.CharacterDTO[] GetListCharacterByIdActorAndIdFilm(int idfilm, int idactor) {
+        public DTO.CharacterDTO[] GetListCharacterByIdActorAndIdFilm(int idfilm, int idactor) {
             return base.Channel.GetListCharacterByIdActorAndIdFilm(idfilm, idactor);
         }
         
-        public System.Threading.Tasks.Task<WpfApp.ServiceReference1.CharacterDTO[]> GetListCharacterByIdActorAndIdFilmAsync(int idfilm, int idactor) {
+        public System.Threading.Tasks.Task<DTO.CharacterDTO[]> GetListCharacterByIdActorAndIdFilmAsync(int idfilm, int idactor) {
             return base.Channel.GetListCharacterByIdActorAndIdFilmAsync(idfilm, idactor);
         }
         
-        public WpfApp.ServiceReference1.FilmDTO[] FindListFilmByPartialActorName(string nomActor) {
+        public DTO.FilmDTO[] FindListFilmByPartialActorName(string nomActor) {
             return base.Channel.FindListFilmByPartialActorName(nomActor);
         }
         
-        public System.Threading.Tasks.Task<WpfApp.ServiceReference1.FilmDTO[]> FindListFilmByPartialActorNameAsync(string nomActor) {
+        public System.Threading.Tasks.Task<DTO.FilmDTO[]> FindListFilmByPartialActorNameAsync(string nomActor) {
             return base.Channel.FindListFilmByPartialActorNameAsync(nomActor);
         }
         
-        public WpfApp.ServiceReference1.FullActorDTO GetFullActorDetailsByIdActor(int i) {
+        public DTO.FullActorDTO GetFullActorDetailsByIdActor(int i) {
             return base.Channel.GetFullActorDetailsByIdActor(i);
         }
         
-        public System.Threading.Tasks.Task<WpfApp.ServiceReference1.FullActorDTO> GetFullActorDetailsByIdActorAsync(int i) {
+        public System.Threading.Tasks.Task<DTO.FullActorDTO> GetFullActorDetailsByIdActorAsync(int i) {
             return base.Channel.GetFullActorDetailsByIdActorAsync(i);
         }
         
-        public void InsertCommentOnActorId(WpfApp.ServiceReference1.CommentDTO comment, int ActorId) {
+        public void InsertCommentOnActorId(DTO.CommentDTO comment, int ActorId) {
             base.Channel.InsertCommentOnActorId(comment, ActorId);
         }
         
-        public System.Threading.Tasks.Task InsertCommentOnActorIdAsync(WpfApp.ServiceReference1.CommentDTO comment, int ActorId) {
+        public System.Threading.Tasks.Task InsertCommentOnActorIdAsync(DTO.CommentDTO comment, int ActorId) {
             return base.Channel.InsertCommentOnActorIdAsync(comment, ActorId);
         }
         
@@ -630,6 +208,14 @@ namespace WpfApp.ServiceReference1 {
         
         public System.Threading.Tasks.Task<WpfApp.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(WpfApp.ServiceReference1.CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
+        }
+        
+        public DTO.ActorDTO[] GetAllActors() {
+            return base.Channel.GetAllActors();
+        }
+        
+        public System.Threading.Tasks.Task<DTO.ActorDTO[]> GetAllActorsAsync() {
+            return base.Channel.GetAllActorsAsync();
         }
     }
 }

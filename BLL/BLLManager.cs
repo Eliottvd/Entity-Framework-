@@ -199,5 +199,24 @@ namespace BLL
 
 
         }
+
+        public List<ActorDTO> getAllActors()
+        {
+            List<ActorDTO> actorDTOs = new List<ActorDTO>();
+
+            List<Actor> listActor = dalM.getActor();
+
+            foreach (Actor a in listActor)
+            {
+                actorDTOs.Add(new ActorDTO
+                {
+                    Name = a.Name,
+                    ActorId = a.ActorId
+                });
+            }
+
+            return actorDTOs;
+        }
+
     }
 }

@@ -33,6 +33,9 @@ namespace WcfService
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
+
+        [OperationContract]
+        List<ActorDTO> GetAllActors();
     }
 
 
