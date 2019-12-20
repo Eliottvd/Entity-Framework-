@@ -163,6 +163,29 @@ namespace BLL
             return filmDTOs;
         }
 
+        public List<ActorDTO> FindListActorByPartialActorName(String name)
+        {
+            List<ActorDTO> actorDTOs = new List<ActorDTO>();
+            try
+            {
+                IQueryable<Actor> acteurs = dalM.FilmCtx.Actors.Where(a => a.Name.Contains(name));
+
+                foreach (Actor a in acteurs)
+                {
+                    actorDTOs.Add(new ActorDTO
+                    {
+                        ActorId = a.ActorId,
+                        Name = a.Name
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e.Message);
+            }
+            return actorDTOs;
+        }
+
         public FullActorDTO GetFullActorDetailsByIdActor(int idActor)
         {
             FullActorDTO FullActeur = new FullActorDTO();
@@ -171,6 +194,24 @@ namespace BLL
                 Actor acteur = dalM.FilmCtx.Actors.Find(idActor);
                 FullActeur.ActorId = acteur.ActorId;
                 FullActeur.Name = acteur.Name;
+                foreach (var film in acteur.Films)
+                {
+                    FullActeur.Films.Add(new FilmDTO
+                    {
+                        Title = film.Title,
+                        OriginalTitle = film.OriginalTitle,
+                        ReleaseDate = film.ReleaseDate,
+                        VoteAverage = film.VoteAverage,
+                        VoteCount = film.VoteCount,
+                        Runtime = film.Runtime,
+                        Posterpath = film.Posterpath,
+                        Budget = film.Budget,
+                        TagLine = film.TagLine,
+                        Status = film.Status.StatusName,
+                        Rating = film.Rating.Type
+                    });
+                }
+
             }
             catch (Exception e)
             {

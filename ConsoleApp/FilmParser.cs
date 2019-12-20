@@ -86,6 +86,8 @@ namespace ConsoleApp
                         ca.Actor.CharacterActors.Add(ca);
                         ca.Character.CharacterActors.Add(ca);
                         f.CharacterActors.Add(ca);
+                        //f.Actors.Add(ca.Actor);
+                        //f.Characters.Add(c);
                     }
             }
             return f;

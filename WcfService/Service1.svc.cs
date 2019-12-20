@@ -71,5 +71,10 @@ namespace WcfService
         {
             bllManager.InsertCommentOnActorId(comment, ActorId);
         }
+
+        public List<ActorDTO> FindListActorByPartialActorName(String name)
+        {
+            return bllManager.FindListActorByPartialActorName(name);
+        }
     }
 }

@@ -33,6 +33,9 @@ namespace DAL
             CharacterActors = new List<CharacterActors>();
             Genres = new List<Genre>();
             Directors = new List<Director>();
+            Actors = new List<Actor>();
+            Characters = new List<Character>();
+
         }
 
         public virtual ICollection<CharacterActors> CharacterActors { get; set; }

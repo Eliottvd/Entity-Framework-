@@ -18,6 +18,8 @@ namespace DAL
         {
             CharacterName = Name;
             CharacterActors = new List<CharacterActors>();
+            Actors = new List<Actor>();
+            Films = new List<Film>();
         }
 
         public virtual ICollection<CharacterActors> CharacterActors { get; set; }

@@ -11,7 +11,7 @@ namespace DAL
         public FilmCtx(string connString) : base(connString)
         {
             SqlConnection.ClearAllPools();
-            //Database.SetInitializer<FilmCtx>(new DropCreateDatabaseAlways<FilmCtx>());
+            Database.SetInitializer<FilmCtx>(new DropCreateDatabaseAlways<FilmCtx>());
 
         }
 

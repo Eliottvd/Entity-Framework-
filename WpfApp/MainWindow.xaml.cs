@@ -25,11 +25,13 @@ namespace WpfApp
     {
         private ObservableCollection<ActorViewModel> actors = new ObservableCollection<ActorViewModel>();
         private ServiceReference1.Service1Client serv;
+        private ObservableCollection<string> actorNames;
         public MainWindow()
         {
             InitializeComponent();
             Serv = new ServiceReference1.Service1Client();
-
+            ActorNames = new ObservableCollection<string>();
+            /*
             ActorDTO[] actorDTOs = serv.GetAllActors();
             foreach (var actor in actorDTOs)
             {
@@ -37,11 +39,57 @@ namespace WpfApp
                 {
                     Name = actor.Name
                 });
+                ActorsIDs.Add(actor.Name);
             }
-            dgActors.ItemsSource = Actors;
+            //dgActors.ItemsSource = Actors;
+            ListBoxActeurs.ItemsSource = ActorsIDs;*/
         }
 
         public ObservableCollection<ActorViewModel> Actors { get => actors; set => actors = value; }
         public Service1Client Serv { get => serv; set => serv = value; }
+        public ObservableCollection<string> ActorNames { get => actorNames; set => actorNames = value; }
+
+        private void tbActor_KeyUp(object sender, KeyEventArgs e)
+        {
+          
+            ActorDTO[] actorDTOs = serv.FindListActorByPartialActorName(tbActor.Text);
+            ActorNames.Clear();
+            Actors.Clear();
+            foreach (var actor in actorDTOs)
+            {
+                Actors.Add(new ActorViewModel
+                {
+                    ActorId = actor.ActorId,
+                    Name = actor.Name
+                });
+                ActorNames.Add(actor.Name);
+            }
+            //dgActors.ItemsSource = Actors;
+            ListBoxActeurs.ItemsSource = ActorNames;
+
+        }
+
+        private void ListBoxActeurs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int id = 0;
+            FullActorDTO fa;
+            ObservableCollection<FilmDTO> filmDTOs = new ObservableCollection<FilmDTO>();
+            if(ListBoxActeurs.SelectedItem != null)
+            {
+                Console.WriteLine(ListBoxActeurs.SelectedItem);
+                foreach (var avm in Actors)
+                {
+                    if (avm.Name == ListBoxActeurs.SelectedItem.ToString())
+                    {
+                        id = avm.ActorId;
+                        //break;
+                    }
+                }
+
+                fa = Serv.GetFullActorDetailsByIdActor(id);
+                Console.WriteLine("fa : " + fa.ActorId);
+                dgActors.ItemsSource = fa.Films;
+            }
+        }
     }
 }

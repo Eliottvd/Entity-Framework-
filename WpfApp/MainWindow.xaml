@@ -32,13 +32,16 @@
             <!--C0: Row 0-->
             <StackPanel Grid.Row="0" Margin="0,0,0,5">
                 <Label Content="Cherche : "/>
-                <TextBox x:Name="tbActor"/>
+                <TextBox x:Name="tbActor" KeyUp="tbActor_KeyUp"/>
             </StackPanel>
 
             <!--C0: Row 1-->
-            <StackPanel Grid.Row="1" Margin="0,5,0,0">
+            <ScrollViewer Grid.Row="1" Margin="0,5,0,0">
+                <ListBox x:Name="ListBoxActeurs" 
+                         ItemsSource="{Binding Path=ActorID}" SelectionChanged="ListBoxActeurs_SelectionChanged">
 
-            </StackPanel>
+                </ListBox>
+            </ScrollViewer>
         </Grid>
 
         
@@ -46,6 +49,6 @@
     <!--Column 1-->
         <DataGrid x:Name="dgActors" Margin="10"
                   Grid.Row="1" Grid.Column="1" 
-                  ItemsSource="{Binding Actors}"/>
+                  />
     </Grid>
 </Window>

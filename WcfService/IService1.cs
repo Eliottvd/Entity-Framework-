@@ -36,6 +36,9 @@ namespace WcfService
 
         [OperationContract]
         List<ActorDTO> GetAllActors();
+
+        [OperationContract]
+        List<ActorDTO> FindListActorByPartialActorName(String name);
     }
 
 

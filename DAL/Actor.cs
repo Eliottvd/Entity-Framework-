@@ -20,6 +20,8 @@ namespace DAL
             Name = acteurdetail[1];
             CharacterActors = new List<CharacterActors>();
             Comments = new List<Comment>();
+            Characters = new List<Character>();
+            Films = new List<Film>();
         }
 
         public virtual ICollection<Comment> Comments { get; set; }

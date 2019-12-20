@@ -125,6 +125,12 @@ namespace WpfApp.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllActors", ReplyAction="http://tempuri.org/IService1/GetAllActorsResponse")]
         System.Threading.Tasks.Task<DTO.ActorDTO[]> GetAllActorsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/FindListActorByPartialActorName", ReplyAction="http://tempuri.org/IService1/FindListActorByPartialActorNameResponse")]
+        DTO.ActorDTO[] FindListActorByPartialActorName(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/FindListActorByPartialActorName", ReplyAction="http://tempuri.org/IService1/FindListActorByPartialActorNameResponse")]
+        System.Threading.Tasks.Task<DTO.ActorDTO[]> FindListActorByPartialActorNameAsync(string name);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -216,6 +222,14 @@ namespace WpfApp.ServiceReference1 {
         
         public System.Threading.Tasks.Task<DTO.ActorDTO[]> GetAllActorsAsync() {
             return base.Channel.GetAllActorsAsync();
+        }
+        
+        public DTO.ActorDTO[] FindListActorByPartialActorName(string name) {
+            return base.Channel.FindListActorByPartialActorName(name);
+        }
+        
+        public System.Threading.Tasks.Task<DTO.ActorDTO[]> FindListActorByPartialActorNameAsync(string name) {
+            return base.Channel.FindListActorByPartialActorNameAsync(name);
         }
     }
 }

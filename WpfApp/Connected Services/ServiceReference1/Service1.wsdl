@@ -5,8 +5,7 @@
       <xsd:import schemaLocation="http://localhost:50259/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:50259/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:50259/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DTO" />
-      <xsd:import schemaLocation="http://localhost:50259/Service1.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://localhost:50259/Service1.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/WcfService" />
+      <xsd:import schemaLocation="http://localhost:50259/Service1.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/WcfService" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IService1_GetData_InputMessage">
@@ -57,6 +56,12 @@
   <wsdl:message name="IService1_GetAllActors_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllActorsResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_FindListActorByPartialActorName_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindListActorByPartialActorName" />
+  </wsdl:message>
+  <wsdl:message name="IService1_FindListActorByPartialActorName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindListActorByPartialActorNameResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetData" message="tns:IService1_GetData_InputMessage" />
@@ -89,6 +94,10 @@
     <wsdl:operation name="GetAllActors">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllActors" message="tns:IService1_GetAllActors_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllActorsResponse" message="tns:IService1_GetAllActors_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindListActorByPartialActorName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/FindListActorByPartialActorName" message="tns:IService1_FindListActorByPartialActorName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/FindListActorByPartialActorNameResponse" message="tns:IService1_FindListActorByPartialActorName_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -158,6 +167,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllActors">
       <soap:operation soapAction="http://tempuri.org/IService1/GetAllActors" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindListActorByPartialActorName">
+      <soap:operation soapAction="http://tempuri.org/IService1/FindListActorByPartialActorName" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
