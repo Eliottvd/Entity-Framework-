@@ -85,22 +85,22 @@ namespace WpfApp.ServiceReference1 {
         System.Threading.Tasks.Task<string> GetDataAsync(int value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetListFilmsByIdActor", ReplyAction="http://tempuri.org/IService1/GetListFilmsByIdActorResponse")]
-        DTO.FilmDTO[] GetListFilmsByIdActor(int id);
+        System.Collections.Generic.List<DTO.FilmDTO> GetListFilmsByIdActor(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetListFilmsByIdActor", ReplyAction="http://tempuri.org/IService1/GetListFilmsByIdActorResponse")]
-        System.Threading.Tasks.Task<DTO.FilmDTO[]> GetListFilmsByIdActorAsync(int id);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<DTO.FilmDTO>> GetListFilmsByIdActorAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetListCharacterByIdActorAndIdFilm", ReplyAction="http://tempuri.org/IService1/GetListCharacterByIdActorAndIdFilmResponse")]
-        DTO.CharacterDTO[] GetListCharacterByIdActorAndIdFilm(int idfilm, int idactor);
+        System.Collections.Generic.List<DTO.CharacterDTO> GetListCharacterByIdActorAndIdFilm(int idfilm, int idactor);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetListCharacterByIdActorAndIdFilm", ReplyAction="http://tempuri.org/IService1/GetListCharacterByIdActorAndIdFilmResponse")]
-        System.Threading.Tasks.Task<DTO.CharacterDTO[]> GetListCharacterByIdActorAndIdFilmAsync(int idfilm, int idactor);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<DTO.CharacterDTO>> GetListCharacterByIdActorAndIdFilmAsync(int idfilm, int idactor);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/FindListFilmByPartialActorName", ReplyAction="http://tempuri.org/IService1/FindListFilmByPartialActorNameResponse")]
-        DTO.FilmDTO[] FindListFilmByPartialActorName(string nomActor);
+        System.Collections.Generic.List<DTO.FilmDTO> FindListFilmByPartialActorName(string nomActor);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/FindListFilmByPartialActorName", ReplyAction="http://tempuri.org/IService1/FindListFilmByPartialActorNameResponse")]
-        System.Threading.Tasks.Task<DTO.FilmDTO[]> FindListFilmByPartialActorNameAsync(string nomActor);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<DTO.FilmDTO>> FindListFilmByPartialActorNameAsync(string nomActor);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetFullActorDetailsByIdActor", ReplyAction="http://tempuri.org/IService1/GetFullActorDetailsByIdActorResponse")]
         DTO.FullActorDTO GetFullActorDetailsByIdActor(int i);
@@ -121,16 +121,16 @@ namespace WpfApp.ServiceReference1 {
         System.Threading.Tasks.Task<WpfApp.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(WpfApp.ServiceReference1.CompositeType composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllActors", ReplyAction="http://tempuri.org/IService1/GetAllActorsResponse")]
-        DTO.ActorDTO[] GetAllActors();
+        System.Collections.Generic.List<DTO.ActorDTO> GetAllActors();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllActors", ReplyAction="http://tempuri.org/IService1/GetAllActorsResponse")]
-        System.Threading.Tasks.Task<DTO.ActorDTO[]> GetAllActorsAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.List<DTO.ActorDTO>> GetAllActorsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/FindListActorByPartialActorName", ReplyAction="http://tempuri.org/IService1/FindListActorByPartialActorNameResponse")]
-        DTO.ActorDTO[] FindListActorByPartialActorName(string name);
+        System.Collections.Generic.List<DTO.ActorDTO> FindListActorByPartialActorName(string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/FindListActorByPartialActorName", ReplyAction="http://tempuri.org/IService1/FindListActorByPartialActorNameResponse")]
-        System.Threading.Tasks.Task<DTO.ActorDTO[]> FindListActorByPartialActorNameAsync(string name);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<DTO.ActorDTO>> FindListActorByPartialActorNameAsync(string name);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -168,27 +168,27 @@ namespace WpfApp.ServiceReference1 {
             return base.Channel.GetDataAsync(value);
         }
         
-        public DTO.FilmDTO[] GetListFilmsByIdActor(int id) {
+        public System.Collections.Generic.List<DTO.FilmDTO> GetListFilmsByIdActor(int id) {
             return base.Channel.GetListFilmsByIdActor(id);
         }
         
-        public System.Threading.Tasks.Task<DTO.FilmDTO[]> GetListFilmsByIdActorAsync(int id) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<DTO.FilmDTO>> GetListFilmsByIdActorAsync(int id) {
             return base.Channel.GetListFilmsByIdActorAsync(id);
         }
         
-        public DTO.CharacterDTO[] GetListCharacterByIdActorAndIdFilm(int idfilm, int idactor) {
+        public System.Collections.Generic.List<DTO.CharacterDTO> GetListCharacterByIdActorAndIdFilm(int idfilm, int idactor) {
             return base.Channel.GetListCharacterByIdActorAndIdFilm(idfilm, idactor);
         }
         
-        public System.Threading.Tasks.Task<DTO.CharacterDTO[]> GetListCharacterByIdActorAndIdFilmAsync(int idfilm, int idactor) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<DTO.CharacterDTO>> GetListCharacterByIdActorAndIdFilmAsync(int idfilm, int idactor) {
             return base.Channel.GetListCharacterByIdActorAndIdFilmAsync(idfilm, idactor);
         }
         
-        public DTO.FilmDTO[] FindListFilmByPartialActorName(string nomActor) {
+        public System.Collections.Generic.List<DTO.FilmDTO> FindListFilmByPartialActorName(string nomActor) {
             return base.Channel.FindListFilmByPartialActorName(nomActor);
         }
         
-        public System.Threading.Tasks.Task<DTO.FilmDTO[]> FindListFilmByPartialActorNameAsync(string nomActor) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<DTO.FilmDTO>> FindListFilmByPartialActorNameAsync(string nomActor) {
             return base.Channel.FindListFilmByPartialActorNameAsync(nomActor);
         }
         
@@ -216,19 +216,19 @@ namespace WpfApp.ServiceReference1 {
             return base.Channel.GetDataUsingDataContractAsync(composite);
         }
         
-        public DTO.ActorDTO[] GetAllActors() {
+        public System.Collections.Generic.List<DTO.ActorDTO> GetAllActors() {
             return base.Channel.GetAllActors();
         }
         
-        public System.Threading.Tasks.Task<DTO.ActorDTO[]> GetAllActorsAsync() {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<DTO.ActorDTO>> GetAllActorsAsync() {
             return base.Channel.GetAllActorsAsync();
         }
         
-        public DTO.ActorDTO[] FindListActorByPartialActorName(string name) {
+        public System.Collections.Generic.List<DTO.ActorDTO> FindListActorByPartialActorName(string name) {
             return base.Channel.FindListActorByPartialActorName(name);
         }
         
-        public System.Threading.Tasks.Task<DTO.ActorDTO[]> FindListActorByPartialActorNameAsync(string name) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<DTO.ActorDTO>> FindListActorByPartialActorNameAsync(string name) {
             return base.Channel.FindListActorByPartialActorNameAsync(name);
         }
     }

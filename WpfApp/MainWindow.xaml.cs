@@ -24,12 +24,12 @@ namespace WpfApp
     public partial class MainWindow : Window
     {
         private ObservableCollection<ActorViewModel> actors = new ObservableCollection<ActorViewModel>();
-        private ServiceReference1.Service1Client serv;
+        private Service1Client serv;
         private ObservableCollection<string> actorNames;
         public MainWindow()
         {
             InitializeComponent();
-            Serv = new ServiceReference1.Service1Client();
+            Serv = new Service1Client();
             ActorNames = new ObservableCollection<string>();
             /*
             ActorDTO[] actorDTOs = serv.GetAllActors();
@@ -52,7 +52,7 @@ namespace WpfApp
         private void tbActor_KeyUp(object sender, KeyEventArgs e)
         {
           
-            ActorDTO[] actorDTOs = serv.FindListActorByPartialActorName(tbActor.Text);
+            List<ActorDTO> actorDTOs = serv.FindListActorByPartialActorName(tbActor.Text);
             ActorNames.Clear();
             Actors.Clear();
             foreach (var actor in actorDTOs)
