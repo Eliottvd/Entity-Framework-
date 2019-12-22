@@ -163,12 +163,13 @@ namespace BLL
             return filmDTOs;
         }
 
-        public List<ActorDTO> FindListActorByPartialActorName(String name)
+        public List<ActorDTO> FindListActorByPartialActorName(String name, int pageNumber, int pageSize)
         {
             List<ActorDTO> actorDTOs = new List<ActorDTO>();
             try
             {
-                IQueryable<Actor> acteurs = dalM.FilmCtx.Actors.Where(a => a.Name.Contains(name));
+                //IQueryable<Actor> acteurs = dalM.FilmCtx.Actors.Where(a => a.Name.Contains(name));
+                IQueryable<Actor> acteurs = dalM.FilmCtx.Actors.Where(a => a.Name.Contains(name)).OrderBy(a => a.Name).Skip(pageNumber * pageSize).Take(pageSize);
 
                 foreach (Actor a in acteurs)
                 {

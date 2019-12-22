@@ -149,5 +149,8 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ASX_Next_blue_16x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

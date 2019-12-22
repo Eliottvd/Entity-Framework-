@@ -127,10 +127,10 @@ namespace WpfApp.ServiceReference1 {
         System.Threading.Tasks.Task<System.Collections.Generic.List<DTO.ActorDTO>> GetAllActorsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/FindListActorByPartialActorName", ReplyAction="http://tempuri.org/IService1/FindListActorByPartialActorNameResponse")]
-        System.Collections.Generic.List<DTO.ActorDTO> FindListActorByPartialActorName(string name);
+        System.Collections.Generic.List<DTO.ActorDTO> FindListActorByPartialActorName(string name, int pageNumber, int pageSize);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/FindListActorByPartialActorName", ReplyAction="http://tempuri.org/IService1/FindListActorByPartialActorNameResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<DTO.ActorDTO>> FindListActorByPartialActorNameAsync(string name);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<DTO.ActorDTO>> FindListActorByPartialActorNameAsync(string name, int pageNumber, int pageSize);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -224,12 +224,12 @@ namespace WpfApp.ServiceReference1 {
             return base.Channel.GetAllActorsAsync();
         }
         
-        public System.Collections.Generic.List<DTO.ActorDTO> FindListActorByPartialActorName(string name) {
-            return base.Channel.FindListActorByPartialActorName(name);
+        public System.Collections.Generic.List<DTO.ActorDTO> FindListActorByPartialActorName(string name, int pageNumber, int pageSize) {
+            return base.Channel.FindListActorByPartialActorName(name, pageNumber, pageSize);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<DTO.ActorDTO>> FindListActorByPartialActorNameAsync(string name) {
-            return base.Channel.FindListActorByPartialActorNameAsync(name);
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<DTO.ActorDTO>> FindListActorByPartialActorNameAsync(string name, int pageNumber, int pageSize) {
+            return base.Channel.FindListActorByPartialActorNameAsync(name, pageNumber, pageSize);
         }
     }
 }

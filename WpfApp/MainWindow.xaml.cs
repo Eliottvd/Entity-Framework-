@@ -26,6 +26,8 @@ namespace WpfApp
         private ObservableCollection<ActorViewModel> actors = new ObservableCollection<ActorViewModel>();
         private Service1Client serv;
         private ObservableCollection<string> actorNames;
+        private int pageNumber = 0;
+        private int pageSize = 10;
         public MainWindow()
         {
             InitializeComponent();
@@ -52,20 +54,7 @@ namespace WpfApp
         private void tbActor_KeyUp(object sender, KeyEventArgs e)
         {
           
-            List<ActorDTO> actorDTOs = serv.FindListActorByPartialActorName(tbActor.Text);
-            ActorNames.Clear();
-            Actors.Clear();
-            foreach (var actor in actorDTOs)
-            {
-                Actors.Add(new ActorViewModel
-                {
-                    ActorId = actor.ActorId,
-                    Name = actor.Name
-                });
-                ActorNames.Add(actor.Name);
-            }
-            //dgActors.ItemsSource = Actors;
-            ListBoxActeurs.ItemsSource = ActorNames;
+            
 
         }
 
@@ -90,6 +79,41 @@ namespace WpfApp
                 Console.WriteLine("fa : " + fa.ActorId);
                 dgActors.ItemsSource = fa.Films;
             }
+        }
+
+        private void tbActor_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            updateActorBox();
+        }
+
+        private void nextPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageNumber++;
+            updateActorBox();
+        }
+
+        private void PreviousPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageNumber = (pageNumber > 0) ? pageNumber-- : 0;
+            updateActorBox();
+        }
+
+        private void updateActorBox()
+        {
+            List<ActorDTO> actorDTOs = serv.FindListActorByPartialActorName(tbActor.Text, pageNumber, pageSize);
+            ActorNames.Clear();
+            Actors.Clear();
+            foreach (var actor in actorDTOs)
+            {
+                Actors.Add(new ActorViewModel
+                {
+                    ActorId = actor.ActorId,
+                    Name = actor.Name
+                });
+                ActorNames.Add(actor.Name);
+            }
+            //dgActors.ItemsSource = Actors;
+            ListBoxActeurs.ItemsSource = ActorNames;
         }
     }
 }

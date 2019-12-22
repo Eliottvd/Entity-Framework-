@@ -16,37 +16,56 @@
             <RowDefinition MaxHeight="70"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <!--Title-->
         <Label Content="Actors" FontSize="30" 
                Margin="0,8,0,10" HorizontalAlignment="Center"
                Grid.ColumnSpan="2"/>
-        
+
         <!--Column 0-->
         <Grid Grid.Column="0" Grid.Row="1" Margin="10">
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="83*"></RowDefinition>
+                <RowDefinition Height="37*"/>
+                <RowDefinition Height="209*"></RowDefinition>
             </Grid.RowDefinitions>
-            
+
             <!--C0: Row 0-->
-            <StackPanel Grid.Row="0" Margin="0,0,0,5">
+            <StackPanel Grid.Row="0" Margin="0,0,0,16">
                 <Label Content="Cherche : "/>
-                <TextBox x:Name="tbActor" KeyUp="tbActor_KeyUp"/>
+                <TextBox x:Name="tbActor" KeyUp="tbActor_KeyUp" TextChanged="tbActor_TextChanged"/>
             </StackPanel>
 
             <!--C0: Row 1-->
-            <ScrollViewer Grid.Row="1" Margin="0,5,0,0">
+            <ScrollViewer Grid.Row="2">
                 <ListBox x:Name="ListBoxActeurs" 
                          ItemsSource="{Binding Path=ActorID}" SelectionChanged="ListBoxActeurs_SelectionChanged">
 
                 </ListBox>
             </ScrollViewer>
+            <Button x:Name="nextPageButton" Content="" Margin="34,6,0,0" Click="nextPageButton_Click" RenderTransformOrigin="1.05,0.45" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Height="20">
+                <Button.Background>
+                    <ImageBrush ImageSource="ASX_Next_blue_16x.png" Stretch="Uniform"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="PreviousPageButton" Content="" HorizontalAlignment="Left" Margin="30,6,0,0" VerticalAlignment="Top"  Click="PreviousPageButton_Click" Grid.Row="1" Width="30" Height="20">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+                <Button.Background>
+                    <ImageBrush ImageSource="ASX_Next_blue_16x.png" Stretch="Uniform"/>
+                </Button.Background>
+            </Button>
         </Grid>
 
-        
 
-    <!--Column 1-->
+
+        <!--Column 1-->
         <DataGrid x:Name="dgActors" Margin="10"
                   Grid.Row="1" Grid.Column="1" 
                   />

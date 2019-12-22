@@ -59,8 +59,6 @@ namespace DAL
                 film.Characters.Add(ca.Character);
             }
 
-            //Console.WriteLine("Ici star command rien ne va plus ");
-
             foreach (Genre g in film.Genres)
                 if (FilmCtx.Genre.Any(o => o.GenreId == g.GenreId))
                 {

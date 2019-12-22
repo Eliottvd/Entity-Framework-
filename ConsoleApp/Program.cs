@@ -30,28 +30,11 @@ namespace ConsoleApp
                 System.Environment.Exit(1);
             }
 
-            for (int i =0; i < 10; i++)
+            for (int i =0; i < 100; i++)
             {
                 readAnddecodeline(f);
                 Console.WriteLine("Decoding line " + i);
             }
-            
-
-            //BLLManager bllM = new BLLManager("name=FilmDB");
-            
-            //List <FilmDTO> listFilmDTO = bllM.FindListFilmByPartialActorName("ikko");
-            //List <CharacterDTO> listCharacterDTO;
-            //foreach (FilmDTO film in listFilmDTO)
-            //{
-            //    Console.WriteLine(film.toString());
-            //}
-
-            //listCharacterDTO = bllM.GetListCharacterByIdActorAndIdFilm(1, 2);
-
-            //foreach (CharacterDTO chara in listCharacterDTO)
-            //{
-            //    Console.WriteLine(chara.Name);
-            //}
 
             Console.ReadLine();
         }
@@ -73,7 +56,6 @@ namespace ConsoleApp
 
         private static void SaveFilmToDataBase(Film film)
         {
-            //using (var dal = new DALManager("TestDB"))
             using (var dal = new DALManager("name=FilmDB"))
             {
                 dal.AddFilm(film);
