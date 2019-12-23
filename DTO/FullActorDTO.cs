@@ -10,6 +10,7 @@ namespace DTO
     {
         public List<FilmDTO> Films { get; set; }
         public List<CharacterDTO> Characters { get; set; }
+        public List<CommentDTO> Comments { get; set; }
         public FullActorDTO()
         {
 

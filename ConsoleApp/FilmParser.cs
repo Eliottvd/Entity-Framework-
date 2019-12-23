@@ -31,17 +31,17 @@ namespace ConsoleApp
             f.FilmId = Int32.Parse(filmdetailwords[0]);
             f.Title = filmdetailwords[1];
             f.OriginalTitle = filmdetailwords[2];
-            f.ReleaseDate = DateTime.ParseExact(filmdetailwords[3], "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            f.ReleaseDate = String.IsNullOrEmpty(filmdetailwords[3]) ? (DateTime?)null : DateTime.ParseExact(filmdetailwords[3], "yyyy-MM-dd", CultureInfo.InvariantCulture);
             f.Status = new Status(filmdetailwords[4]);
             f.Status.Film.Add(f);
-            f.VoteAverage = float.Parse(filmdetailwords[5]);
-            f.VoteCount = Int32.Parse(filmdetailwords[6]);
-            f.Runtime = Int32.Parse(filmdetailwords[7]);
+            f.VoteAverage = String.IsNullOrEmpty(filmdetailwords[5]) ? 0 : float.Parse(filmdetailwords[5]);
+            f.VoteCount = String.IsNullOrEmpty(filmdetailwords[6]) ? 0 : Int32.Parse(filmdetailwords[6]);
+            f.Runtime = String.IsNullOrEmpty(filmdetailwords[7]) ? 0 : Int32.Parse(filmdetailwords[7]);
             f.Rating = new Rating(filmdetailwords[8]);
             f.Rating.Film.Add(f);
             // http://image.tmdb.org/t/p/w185/
             f.Posterpath = filmdetailwords[9];
-            f.Budget = Int32.Parse(filmdetailwords[10]);
+            f.Budget = String.IsNullOrEmpty(filmdetailwords[10]) ? 0 : Int32.Parse(filmdetailwords[10]);
             f.TagLine = filmdetailwords[11];
 
             // Initialization of the optionnal fields of the movie

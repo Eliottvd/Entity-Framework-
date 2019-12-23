@@ -18,6 +18,8 @@ namespace ConsoleApp
         {
             
             StreamReader f;
+            int startLine = 28800;
+            int endLine = 29000;
 
             if (System.Environment.MachineName == "LAPTOP-QHT69N73")
                 f = new StreamReader(@"D:\OneDrive - Enseignement de la Province de Liège\Ecole\BLOC3\Q1\C#\movies_v2.txt");
@@ -30,7 +32,11 @@ namespace ConsoleApp
                 System.Environment.Exit(1);
             }
 
-            for (int i =0; i < 100; i++)
+            for (int i = 0; i <= startLine; i++)
+            {
+                f.ReadLine();
+            }
+            for (int i = startLine; i < endLine; i++)
             {
                 readAnddecodeline(f);
                 Console.WriteLine("Decoding line " + i);

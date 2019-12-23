@@ -28,73 +28,72 @@ namespace WpfApp
         private ObservableCollection<string> actorNames;
         private int pageNumber = 0;
         private int pageSize = 10;
+        private int movieIndex;
+        private FullActorDTO selectedActor;
+        private List<FilmDTO> filmDTOs = new List<FilmDTO>();
         public MainWindow()
         {
             InitializeComponent();
             Serv = new Service1Client();
             ActorNames = new ObservableCollection<string>();
-            /*
-            ActorDTO[] actorDTOs = serv.GetAllActors();
-            foreach (var actor in actorDTOs)
-            {
-                Actors.Add(new ActorViewModel
-                {
-                    Name = actor.Name
-                });
-                ActorsIDs.Add(actor.Name);
-            }
-            //dgActors.ItemsSource = Actors;
-            ListBoxActeurs.ItemsSource = ActorsIDs;*/
         }
 
         public ObservableCollection<ActorViewModel> Actors { get => actors; set => actors = value; }
         public Service1Client Serv { get => serv; set => serv = value; }
         public ObservableCollection<string> ActorNames { get => actorNames; set => actorNames = value; }
-
-        private void tbActor_KeyUp(object sender, KeyEventArgs e)
-        {
-          
-            
-
-        }
+        public ObservableCollection<string> CharacterNames { get => actorNames; set => actorNames = value; }
 
         private void ListBoxActeurs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int id = 0;
-            FullActorDTO fa;
-            ObservableCollection<FilmDTO> filmDTOs = new ObservableCollection<FilmDTO>();
-            if(ListBoxActeurs.SelectedItem != null)
+            movieIndex = 0;
+            
+
+            if (listBoxActeurs.SelectedItem != null)
             {
-                Console.WriteLine(ListBoxActeurs.SelectedItem);
+                Console.WriteLine(listBoxActeurs.SelectedItem);
                 foreach (var avm in Actors)
                 {
-                    if (avm.Name == ListBoxActeurs.SelectedItem.ToString())
+                    if (avm.Name == listBoxActeurs.SelectedItem.ToString())
                     {
                         id = avm.ActorId;
-                        //break;
+                        break;
                     }
                 }
 
-                fa = Serv.GetFullActorDetailsByIdActor(id);
-                Console.WriteLine("fa : " + fa.ActorId);
-                dgActors.ItemsSource = fa.Films;
+                selectedActor = Serv.GetFullActorDetailsByIdActor(id);
+                Console.WriteLine("fa : " + selectedActor.ActorId);
+
+                if (selectedActor.Name.Contains(" "))
+                {
+                    actorFirstnameLabel.Content = selectedActor.Name.Substring(0, selectedActor.Name.IndexOf(' '));
+                    actorNameLabel.Content = selectedActor.Name.Substring(selectedActor.Name.IndexOf(' ') + 1);
+                }
+                else
+                    actorFirstnameLabel.Content = selectedActor.Name;
+
+                filmDTOs = Serv.FindListFilmByPartialActorName(selectedActor.Name);
+                Console.WriteLine(filmDTOs.Count());
+                updateMovieInfo(movieIndex);
             }
         }
 
         private void tbActor_TextChanged(object sender, TextChangedEventArgs e)
         {
+            pageNumber = 0;
             updateActorBox();
         }
 
         private void nextPageButton_Click(object sender, RoutedEventArgs e)
         {
-            pageNumber++;
+            if (listBoxActeurs.Items.Count >= pageSize)
+                pageNumber++;
             updateActorBox();
         }
 
         private void PreviousPageButton_Click(object sender, RoutedEventArgs e)
         {
-            pageNumber = (pageNumber > 0) ? pageNumber-- : 0;
+            pageNumber = (pageNumber > 0) ? --pageNumber : 0;
             updateActorBox();
         }
 
@@ -112,8 +111,53 @@ namespace WpfApp
                 });
                 ActorNames.Add(actor.Name);
             }
-            //dgActors.ItemsSource = Actors;
-            ListBoxActeurs.ItemsSource = ActorNames;
+            listBoxActeurs.ItemsSource = ActorNames;
+        }
+
+        private void updateMovieInfo(int movieIndex)
+        {
+            List<CharacterDTO>  characterDTOs = Serv.GetListCharacterByIdActorAndIdFilm(selectedActor.ActorId, filmDTOs[movieIndex].FilmId);
+            FilmDTO film = filmDTOs[movieIndex];
+
+            titleLabel.Content = film.OriginalTitle;
+            releaseDateLabel.Content = film.ReleaseDate;
+            // Duration
+            TimeSpan ts = TimeSpan.FromMinutes(film.Runtime);
+            durationLabel.Content = string.Format("{0}h{1}", ts.Hours, ts.Minutes);
+            
+            if (!String.IsNullOrWhiteSpace(film.Posterpath))
+            {
+                var imageURL = @" http://image.tmdb.org/t/p/w185";
+                imageURL += film.Posterpath;
+
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(imageURL, UriKind.Absolute);
+                bitmap.EndInit();
+
+                movieImage.Source = bitmap;
+            }
+            
+            charactorListBox.ItemsSource = characterDTOs;
+        }
+
+        private void nextMoviePageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (movieIndex < filmDTOs.Count - 1)
+                movieIndex++;
+            updateMovieInfo(movieIndex);
+        }
+
+        private void PreviousMoviePageButton_Click(object sender, RoutedEventArgs e)
+        {
+            movieIndex = (movieIndex > 0) ? --movieIndex : 0;
+            updateMovieInfo(movieIndex);
+        }
+
+        private void actorCommentButton_Click(object sender, RoutedEventArgs e)
+        {
+            ActorCommentModal actorCommentModal = new ActorCommentModal(selectedActor.ActorId);
+            actorCommentModal.ShowDialog();
         }
     }
 }

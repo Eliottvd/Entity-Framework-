@@ -43,6 +43,7 @@ namespace BLL
                 {
                     tmp = new FilmDTO
                     {
+                        FilmId = ca.Film.FilmId,
                         Title = ca.Film.Title,
                         OriginalTitle = ca.Film.OriginalTitle,
                         ReleaseDate = ca.Film.ReleaseDate,
