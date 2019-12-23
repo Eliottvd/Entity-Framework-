@@ -209,8 +209,8 @@ namespace BLL
                         Posterpath = film.Posterpath,
                         Budget = film.Budget,
                         TagLine = film.TagLine,
-                        Status = film.Status.StatusName,
-                        Rating = film.Rating.Type
+                        Status = film.Status==null?"":film.Status.StatusName,
+                        Rating = film.Rating==null?"":film.Rating.Type
                     });
                 }
 
