@@ -7,14 +7,16 @@
         mc:Ignorable="d"
         Title="ActorCommentModal" Height="313.5" Width="522.5">
     <Grid>
-        <TextBox x:Name="addCommentTextBox" HorizontalAlignment="Left" Height="23" Margin="97,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376"/>
+        <TextBox x:Name="addCommentTextBox" HorizontalAlignment="Left" Height="23" Margin="97,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376" KeyDown="addCommentTextBox_KeyDown"/>
         <Label Content="Commentaire" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top"/>
         <Button x:Name="addCommentButton" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Margin="478,27,0,0" RenderTransformOrigin="8.25,0.525" Click="addCommentButton_Click">
             <Button.Background>
                 <ImageBrush ImageSource="AddComment_16x.png" Stretch="Uniform"/>
             </Button.Background>
         </Button>
-        <DataGrid x:Name="commentDataGrid" HorizontalAlignment="Left" Height="198" Margin="10,75,0,0" VerticalAlignment="Top" Width="494" IsReadOnly="True"/>
+        <DataGrid x:Name="commentDataGrid" HorizontalAlignment="Left" Height="192" Margin="10,81,0,0" VerticalAlignment="Top" Width="494" IsReadOnly="True"/>
+        <Label Content="Note / 5" HorizontalAlignment="Left" Margin="38,49,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="rateCommentTextBox" HorizontalAlignment="Left" Height="23" Margin="97,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" KeyDown="rateCommentTextBox_KeyDown"/>
 
     </Grid>
 </Window>

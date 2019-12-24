@@ -47,7 +47,7 @@ namespace WpfApp
         {
             int id = 0;
             movieIndex = 0;
-            
+
 
             if (listBoxActeurs.SelectedItem != null)
             {
@@ -64,13 +64,22 @@ namespace WpfApp
                 selectedActor = Serv.GetFullActorDetailsByIdActor(id);
                 Console.WriteLine("fa : " + selectedActor.ActorId);
 
-                if (selectedActor.Name.Contains(" "))
+                actorNameLabel.Content = selectedActor.Name;
+                if ((selectedActor.Comments != null))
                 {
-                    actorFirstnameLabel.Content = selectedActor.Name.Substring(0, selectedActor.Name.IndexOf(' '));
-                    actorNameLabel.Content = selectedActor.Name.Substring(selectedActor.Name.IndexOf(' ') + 1);
+                    int nbComments = selectedActor.Comments.Count;
+                    if (nbComments > 0)
+                    {
+                        float total = 0;
+                        foreach (CommentDTO comment in selectedActor.Comments)
+                        {
+                            total += comment.Rate;
+                        }
+                        actorNameLabel.Content = selectedActor.Name + String.Format(" {0} ({1})", (total / nbComments).ToString("0.00"), nbComments);
+                    }
+
                 }
-                else
-                    actorFirstnameLabel.Content = selectedActor.Name;
+                    
 
                 filmDTOs = Serv.FindListFilmByPartialActorName(selectedActor.Name);
                 Console.WriteLine(filmDTOs.Count());
@@ -116,7 +125,7 @@ namespace WpfApp
 
         private void updateMovieInfo(int movieIndex)
         {
-            List<CharacterDTO>  characterDTOs = Serv.GetListCharacterByIdActorAndIdFilm(selectedActor.ActorId, filmDTOs[movieIndex].FilmId);
+            List<CharacterDTO> characterDTOs = Serv.GetListCharacterByIdActorAndIdFilm(selectedActor.ActorId, filmDTOs[movieIndex].FilmId);
             FilmDTO film = filmDTOs[movieIndex];
 
             titleLabel.Content = film.OriginalTitle;
@@ -124,7 +133,7 @@ namespace WpfApp
             // Duration
             TimeSpan ts = TimeSpan.FromMinutes(film.Runtime);
             durationLabel.Content = string.Format("{0}h{1}", ts.Hours, ts.Minutes);
-            
+
             if (!String.IsNullOrWhiteSpace(film.Posterpath))
             {
                 var imageURL = @" http://image.tmdb.org/t/p/w185";
@@ -137,7 +146,7 @@ namespace WpfApp
 
                 movieImage.Source = bitmap;
             }
-            
+
             charactorListBox.ItemsSource = characterDTOs;
         }
 

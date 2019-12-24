@@ -28,14 +28,6 @@ namespace WpfApp
             InitializeComponent();
             ActorId = actorId;
             Serv = new Service1Client();
-
-            // Create table and columns
-            //List<String> columnNameList = new List<String>(new String[] { "Date", "Commentaire", "Note", "Avatar" });
-            //People = new DataTable("Comments");
-            //foreach (String columnName in columnNameList)
-            //{
-            //    People.Columns.Add(new DataColumn(columnName));
-            //}
             updateCommentTable();
         }
 
@@ -44,27 +36,38 @@ namespace WpfApp
 
         private void addCommentButton_Click(object sender, RoutedEventArgs e)
         {
-            CommentDTO comment = new CommentDTO(addCommentTextBox.Text, 5, "test", DateTime.Now);
-            Serv.InsertCommentOnActorId(comment, ActorId);
+            if (!String.IsNullOrWhiteSpace(addCommentTextBox.Text) && !String.IsNullOrWhiteSpace(rateCommentTextBox.Text))
+            {
+                float rate = float.TryParse(rateCommentTextBox.Text, out rate) == false ? rate = 0 : rate;
+                CommentDTO comment = new CommentDTO(addCommentTextBox.Text, rate, "Daniel", DateTime.Now);
+                Serv.InsertCommentOnActorId(comment, ActorId);
+                updateCommentTable();
+                addCommentTextBox.Text = "";
+                rateCommentTextBox.Text = "";
+            }
+
         }
 
         private void updateCommentTable()
         {
-            ObservableCollection<CommentDTO> commentDTO = new ObservableCollection<CommentDTO>();
             FullActorDTO fullActor = Serv.GetFullActorDetailsByIdActor(ActorId);
-            //if (fullActor.Comments != null)
-            //    foreach (CommentDTO comment in fullActor.Comments)
-            //    {
-            //        DataRow dataRow = People.NewRow();
-            //        dataRow["Date"] = comment.Date;
-            //        dataRow["Commentaire"] = comment.Content;
-            //        dataRow["Note"] = comment.Rate;
-            //        dataRow["Avatar"] = comment.Avatar;
-            //        commentDataGrid.Items.Add(dataRow);
-            //    }
-            List<CommentDTO> items = new List<CommentDTO>();
-            items.Add(new CommentDTO("test", 5, "moi", DateTime.Now));
-            commentDataGrid.ItemsSource = items;
+            commentDataGrid.ItemsSource = fullActor.Comments.OrderByDescending(c => c.Date);
+        }
+
+        private void addCommentTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                addCommentButton_Click(sender, e);
+            }
+        }
+
+        private void rateCommentTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                addCommentButton_Click(sender, e);
+            }
         }
     }
 }

@@ -93,12 +93,9 @@
             </Button>
 
         </Canvas>
-        <Canvas Grid.Column="1" Margin="11,10,28,273" Grid.Row="1">
-            <Label Content="Prénom" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="2"/>
-            <Label Content="Nom" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="24" Canvas.Top="34"/>
-            <Label x:Name="actorFirstnameLabel" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="79" Width="242"/>
-            <Label x:Name="actorNameLabel" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="79" Canvas.Top="34" Width="242"/>
-            <Button x:Name="openCommentModalButton" Content="" Canvas.Left="327" Canvas.Top="10" Width="20" Click="actorCommentButton_Click">
+        <Canvas Grid.Column="1" Margin="11,21,28,273" Grid.Row="1">
+            <Label x:Name="actorNameLabel" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="10" Canvas.Top="14" Width="312"/>
+            <Button x:Name="openCommentModalButton" Content="" Canvas.Left="327" Canvas.Top="14" Width="20" Click="actorCommentButton_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="Comment_16x.png" Stretch="Uniform"/>
                 </Button.Background>

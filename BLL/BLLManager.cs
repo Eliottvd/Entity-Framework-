@@ -196,6 +196,17 @@ namespace BLL
                 Actor acteur = dalM.FilmCtx.Actors.Find(idActor);
                 FullActeur.ActorId = acteur.ActorId;
                 FullActeur.Name = acteur.Name;
+                FullActeur.Comments = new List<CommentDTO>();
+                foreach (var comment in acteur.Comments)
+                {
+                    FullActeur.Comments.Add(new CommentDTO { 
+                        Date = comment.Date, 
+                        Content = comment.Content, 
+                        Rate = comment.Rate, 
+                        Avatar = comment.Avatar 
+                    });
+                }
+                FullActeur.Films = new List<FilmDTO>();
                 foreach (var film in acteur.Films)
                 {
                     FullActeur.Films.Add(new FilmDTO
@@ -209,11 +220,19 @@ namespace BLL
                         Posterpath = film.Posterpath,
                         Budget = film.Budget,
                         TagLine = film.TagLine,
-                        Status = film.Status==null?"":film.Status.StatusName,
-                        Rating = film.Rating==null?"":film.Rating.Type
+                        Status = film.Status == null ? "" : film.Status.StatusName,
+                        Rating = film.Rating == null ? "" : film.Rating.Type
                     });
                 }
-
+                FullActeur.Characters = new List<CharacterDTO>();
+                foreach (var character in acteur.Characters)
+                {
+                    FullActeur.Characters.Add(new CharacterDTO
+                    {
+                        CharacterId = character.CharacterId,
+                        Name = character.CharacterName
+                    });
+                }
             }
             catch (Exception e)
             {
@@ -226,19 +245,17 @@ namespace BLL
         public void InsertCommentOnActorId(CommentDTO comment, int actorId)
         {
             Actor acteur = dalM.FilmCtx.Actors.Find(actorId);
-            
-                Comment c = new Comment()
-                {
-                    Actor = acteur,
-                    Rate = comment.Rate,
-                    Avatar = comment.Avatar,
-                    Content = comment.Content,
-                    Date = DateTime.Now
-                };
-                //acteur.Comments.Add(c);
-                
 
-                dalM.AddComment(c);
+            Comment c = new Comment()
+            {
+                Actor = acteur,
+                Rate = comment.Rate,
+                Avatar = comment.Avatar,
+                Content = comment.Content,
+                Date = comment.Date
+            };
+            acteur.Comments.Add(c);
+            dalM.AddComment(c);
 
 
         }
