@@ -78,6 +78,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="FilmViewModel.cs" />
+    <Compile Include="ListActorViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -139,6 +141,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="ASX_Next_blue_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="AddComment_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Comment_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceReference1\" />
   </ItemGroup>
   <ItemGroup>
@@ -155,15 +166,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ASX_Next_blue_16x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="AddComment_16x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Comment_16x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

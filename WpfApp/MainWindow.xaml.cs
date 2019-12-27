@@ -26,16 +26,17 @@ namespace WpfApp
         private ObservableCollection<ActorViewModel> actors = new ObservableCollection<ActorViewModel>();
         private Service1Client serv;
         private ObservableCollection<string> actorNames;
-        private int pageNumber = 0;
-        private int pageSize = 10;
         private int movieIndex;
         private FullActorDTO selectedActor;
         private List<FilmDTO> filmDTOs = new List<FilmDTO>();
+        ListActorViewModel _viewModel;
         public MainWindow()
         {
             InitializeComponent();
             Serv = new Service1Client();
+            _viewModel = new ListActorViewModel();
             ActorNames = new ObservableCollection<string>();
+            base.DataContext = _viewModel;
         }
 
         public ObservableCollection<ActorViewModel> Actors { get => actors; set => actors = value; }
@@ -45,84 +46,40 @@ namespace WpfApp
 
         private void ListBoxActeurs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int id = 0;
-            movieIndex = 0;
-
-
-            if (listBoxActeurs.SelectedItem != null)
+            ActorViewModel tmp = null;
+            foreach (var act in _viewModel.ListActors)
             {
-                Console.WriteLine(listBoxActeurs.SelectedItem);
-                foreach (var avm in Actors)
-                {
-                    if (avm.Name == listBoxActeurs.SelectedItem.ToString())
-                    {
-                        id = avm.ActorId;
-                        break;
-                    }
-                }
-
-                selectedActor = Serv.GetFullActorDetailsByIdActor(id);
-                Console.WriteLine("fa : " + selectedActor.ActorId);
-
-                actorNameLabel.Content = selectedActor.Name;
-                if ((selectedActor.Comments != null))
-                {
-                    int nbComments = selectedActor.Comments.Count;
-                    if (nbComments > 0)
-                    {
-                        float total = 0;
-                        foreach (CommentDTO comment in selectedActor.Comments)
-                        {
-                            total += comment.Rate;
-                        }
-                        actorNameLabel.Content = selectedActor.Name + String.Format(" {0} ({1})", (total / nbComments).ToString("0.00"), nbComments);
-                    }
-
-                }
-                    
-
-                filmDTOs = Serv.FindListFilmByPartialActorName(selectedActor.Name);
-                Console.WriteLine(filmDTOs.Count());
-                updateMovieInfo(movieIndex);
+                if (act.ActorName.Equals(listBoxActeurs.SelectedItem))
+                    tmp = act;
             }
+            _viewModel.updateMovieInfo(tmp);
+            Console.WriteLine("\n\nListe des films : ");
+            foreach (FilmViewModel film in _viewModel.ListFilms)
+            {
+                Console.WriteLine(film.OriginalTitle);
+            }
+            dgFilms.ItemsSource = _viewModel.ListFilms;
         }
 
         private void tbActor_TextChanged(object sender, TextChangedEventArgs e)
         {
-            pageNumber = 0;
-            updateActorBox();
+            _viewModel.resetPageNbr();
+            _viewModel.updateListActors(tbActor.Text);
+            listBoxActeurs.ItemsSource = _viewModel.ListActorsName;
         }
-
+        
         private void nextPageButton_Click(object sender, RoutedEventArgs e)
         {
-            if (listBoxActeurs.Items.Count >= pageSize)
-                pageNumber++;
-            updateActorBox();
+            _viewModel.pageNext(tbActor.Text, listBoxActeurs.Items.Count);
+            listBoxActeurs.ItemsSource = _viewModel.ListActorsName;
         }
 
         private void PreviousPageButton_Click(object sender, RoutedEventArgs e)
         {
-            pageNumber = (pageNumber > 0) ? --pageNumber : 0;
-            updateActorBox();
+            _viewModel.pagePrevious(tbActor.Text);
+            listBoxActeurs.ItemsSource = _viewModel.ListActorsName;
         }
-
-        private void updateActorBox()
-        {
-            List<ActorDTO> actorDTOs = serv.FindListActorByPartialActorName(tbActor.Text, pageNumber, pageSize);
-            ActorNames.Clear();
-            Actors.Clear();
-            foreach (var actor in actorDTOs)
-            {
-                Actors.Add(new ActorViewModel
-                {
-                    ActorId = actor.ActorId,
-                    Name = actor.Name
-                });
-                ActorNames.Add(actor.Name);
-            }
-            listBoxActeurs.ItemsSource = ActorNames;
-        }
-
+        /*
         private void updateMovieInfo(int movieIndex)
         {
             List<CharacterDTO> characterDTOs = Serv.GetListCharacterByIdActorAndIdFilm(selectedActor.ActorId, filmDTOs[movieIndex].FilmId);
@@ -148,19 +105,19 @@ namespace WpfApp
             }
 
             charactorListBox.ItemsSource = characterDTOs;
-        }
+        }*/
 
         private void nextMoviePageButton_Click(object sender, RoutedEventArgs e)
         {
             if (movieIndex < filmDTOs.Count - 1)
                 movieIndex++;
-            updateMovieInfo(movieIndex);
+            //updateMovieInfo(movieIndex);
         }
 
         private void PreviousMoviePageButton_Click(object sender, RoutedEventArgs e)
         {
             movieIndex = (movieIndex > 0) ? --movieIndex : 0;
-            updateMovieInfo(movieIndex);
+            //updateMovieInfo(movieIndex);
         }
 
         private void actorCommentButton_Click(object sender, RoutedEventArgs e)

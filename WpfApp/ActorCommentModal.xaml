@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="ActorCommentModal" Height="313.5" Width="522.5">
     <Grid>
         <TextBox x:Name="addCommentTextBox" HorizontalAlignment="Left" Height="23" Margin="97,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376" KeyDown="addCommentTextBox_KeyDown"/>

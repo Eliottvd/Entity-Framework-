@@ -9,6 +9,7 @@
   <xs:complexType name="FilmDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="Budget" type="xs:int" />
+      <xs:element minOccurs="0" name="FilmId" type="xs:int" />
       <xs:element minOccurs="0" name="OriginalTitle" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Posterpath" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Rating" nillable="true" type="xs:string" />
@@ -40,6 +41,7 @@
       <xs:extension base="tns:ActorDTO">
         <xs:sequence>
           <xs:element minOccurs="0" name="Characters" nillable="true" type="tns:ArrayOfCharacterDTO" />
+          <xs:element minOccurs="0" name="Comments" nillable="true" type="tns:ArrayOfCommentDTO" />
           <xs:element minOccurs="0" name="Films" nillable="true" type="tns:ArrayOfFilmDTO" />
         </xs:sequence>
       </xs:extension>
@@ -53,6 +55,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ActorDTO" nillable="true" type="tns:ActorDTO" />
+  <xs:complexType name="ArrayOfCommentDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CommentDTO" nillable="true" type="tns:CommentDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCommentDTO" nillable="true" type="tns:ArrayOfCommentDTO" />
   <xs:complexType name="CommentDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="Avatar" nillable="true" type="xs:string" />
