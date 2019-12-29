@@ -46,7 +46,8 @@ namespace WpfApp
 
         private void ListBoxActeurs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            float tot = 0;
+            int nbCom = 0;
             ActorViewModel tmp = null;
             foreach (var act in _viewModel.ListActors)
             {
@@ -54,18 +55,38 @@ namespace WpfApp
                     tmp = act;
             }
             if (listBoxActeurs.SelectedItem != null)
+            {
                 selectedActorId = tmp.ActorDTO.ActorId;
+                lblActorName.Content = tmp.ActorDTO.Name;
+                foreach(CommentDTO com in tmp.ActorDTO.Comments)
+                {
+                    tot += com.Rate;
+                    nbCom++;
+                }
+                if(nbCom > 0)
+                {
+                    tot /= nbCom;
+                    lblActorComments.Content = tot + " (" + nbCom + ")";
+                }
+                else
+                    lblActorComments.Content = "/ (0)";
+                
+            } 
             else
+            {
                 selectedActorId = -1;
+                lblActorName.Content = "";
+                lblActorComments.Content = "";
+            }
+            
             _viewModel.updateMovieInfo(tmp);
             Console.WriteLine("\n\nListe des films : ");
             foreach (FilmViewModel film in _viewModel.ListFilms)
             {
-                Console.WriteLine(film.OriginalTitle);
+                Console.WriteLine(film.Title);
             }
             dgFilms.ItemsSource = _viewModel.ListFilms;
             this.dgFilms.Items.Refresh();
-            
         }
 
         private void tbActor_TextChanged(object sender, TextChangedEventArgs e)

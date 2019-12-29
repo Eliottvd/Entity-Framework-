@@ -51,7 +51,7 @@ namespace WpfApp
                 List<string> listFilmTitle = new List<string>();
                 foreach (var film in listFilms)
                 {
-                    listFilmTitle.Add(film.OriginalTitle);
+                    listFilmTitle.Add(film.Title);
                 }
                 return listFilmTitle;
             }
@@ -113,14 +113,13 @@ namespace WpfApp
                 List<FilmDTO> filmDTOs = Serv.FindListFilmByPartialActorName(actor.ActorName);
                 if(filmDTOs.Count > 0)
                 {
-                    List<CharacterDTO> characterDTOs = Serv.GetListCharacterByIdActorAndIdFilm(actor.ActorDTO.ActorId, filmDTOs[movieIndex].FilmId);
-
                     listFilms.Clear();
                     foreach(FilmDTO film in filmDTOs)
                     {
                         TimeSpan ts = TimeSpan.FromMinutes(film.Runtime);
                         string.Format("{0}h{1}", ts.Hours, ts.Minutes);
-                        FilmViewModel fvm = new FilmViewModel(film.OriginalTitle, film.ReleaseDate.ToString(), string.Format("{0}h{1}", ts.Hours, ts.Minutes), film.Posterpath);
+                        List<CharacterDTO> listChar = Serv.GetListCharacterByIdActorAndIdFilm(actor.ActorDTO.ActorId, film.FilmId);
+                        FilmViewModel fvm = new FilmViewModel(film.Title, film.ReleaseDate.ToString(), string.Format("{0}h{1}", ts.Hours, ts.Minutes), film.Posterpath, listChar);
                         listFilms.Add(fvm);
                     }
                 }

@@ -72,6 +72,8 @@
             <StackPanel >
 
                 <StackPanel Orientation="Horizontal" >
+                    <Label x:Name="lblActorName" Content="" FontSize="20" Margin="10,10,0,10"/>
+                    <Label x:Name="lblActorComments" Content="" FontSize="20" Margin="0,10,0,10"/>
                     <Label Content="Add a comment :" Margin="15"/>
                     <Button x:Name="openCommentModalButton" Content="" Height="25" Width="25" Click="actorCommentButton_Click">
                         <Button.Background>
@@ -85,9 +87,6 @@
                       AutoGenerateColumns="False" VerticalAlignment="Top"
                       Width="Auto">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Name" Binding="{Binding OriginalTitle}"/>
-                        <DataGridTextColumn Header="Name" Binding="{Binding ReleaseDate}"/>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Runtime}"/>
                         <DataGridTemplateColumn Header="Poster">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -95,6 +94,17 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
+                        <DataGridTextColumn Header="Release date" Binding="{Binding ReleaseDate}"/>
+                        <DataGridTextColumn Header="Runtime" Binding="{Binding Runtime}"/>
+                        <DataGridTemplateColumn Header="Characters">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ListBox x:Name="listBoxDgCharacters" ItemsSource="{Binding ListChar}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
                     </DataGrid.Columns>
 
                 </DataGrid>
