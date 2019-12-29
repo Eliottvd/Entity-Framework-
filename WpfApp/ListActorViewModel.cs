@@ -126,6 +126,10 @@ namespace WpfApp
                 }
                 
             }
+            else
+            {
+                listFilms.Clear();
+            }
             
         }
 

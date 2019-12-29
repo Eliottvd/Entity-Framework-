@@ -13,7 +13,7 @@ namespace WpfApp
         public string ReleaseDate { get; set; }
         public string Runtime { get; set; }
         public string PosterPath { get; set; }
-        //public BitmapImage PosterBitmap { get; set; }
+        public BitmapImage PosterBitmap { get; set; }
 
         public FilmViewModel()
         {
@@ -26,7 +26,7 @@ namespace WpfApp
             ReleaseDate = releaseDate;
             Runtime = runtime;
             PosterPath = posterPath;
-            /*if (!String.IsNullOrWhiteSpace(posterPath))
+            if (!String.IsNullOrWhiteSpace(posterPath))
             {
                 var imageURL = @" http://image.tmdb.org/t/p/w185";
                 imageURL += posterPath;
@@ -39,7 +39,7 @@ namespace WpfApp
                 PosterBitmap = bitmap;
             }
             else
-                PosterBitmap = null;*/
+                PosterBitmap = null;
         }
     }
 }

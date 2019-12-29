@@ -36,6 +36,7 @@ namespace WpfApp
             _viewModel = new ListActorViewModel();
             ActorNames = new ObservableCollection<string>();
             base.DataContext = _viewModel;
+            selectedActorId = -1;
         }
 
         public ObservableCollection<ActorViewModel> Actors { get => actors; set => actors = value; }
@@ -45,13 +46,17 @@ namespace WpfApp
 
         private void ListBoxActeurs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
             ActorViewModel tmp = null;
             foreach (var act in _viewModel.ListActors)
             {
                 if (act.ActorName.Equals(listBoxActeurs.SelectedItem))
                     tmp = act;
             }
-            selectedActorId = tmp.ActorDTO.ActorId;
+            if (listBoxActeurs.SelectedItem != null)
+                selectedActorId = tmp.ActorDTO.ActorId;
+            else
+                selectedActorId = -1;
             _viewModel.updateMovieInfo(tmp);
             Console.WriteLine("\n\nListe des films : ");
             foreach (FilmViewModel film in _viewModel.ListFilms)
@@ -60,6 +65,7 @@ namespace WpfApp
             }
             dgFilms.ItemsSource = _viewModel.ListFilms;
             this.dgFilms.Items.Refresh();
+            
         }
 
         private void tbActor_TextChanged(object sender, TextChangedEventArgs e)
@@ -80,51 +86,19 @@ namespace WpfApp
             _viewModel.pagePrevious(tbActor.Text);
             listBoxActeurs.ItemsSource = _viewModel.ListActorsName;
         }
-        /*
-        private void updateMovieInfo(int movieIndex)
-        {
-            List<CharacterDTO> characterDTOs = Serv.GetListCharacterByIdActorAndIdFilm(selectedActor.ActorId, filmDTOs[movieIndex].FilmId);
-            FilmDTO film = filmDTOs[movieIndex];
-
-            titleLabel.Content = film.OriginalTitle;
-            releaseDateLabel.Content = film.ReleaseDate;
-            // Duration
-            TimeSpan ts = TimeSpan.FromMinutes(film.Runtime);
-            durationLabel.Content = string.Format("{0}h{1}", ts.Hours, ts.Minutes);
-
-            if (!String.IsNullOrWhiteSpace(film.Posterpath))
-            {
-                var imageURL = @" http://image.tmdb.org/t/p/w185";
-                imageURL += film.Posterpath;
-
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(imageURL, UriKind.Absolute);
-                bitmap.EndInit();
-
-                movieImage.Source = bitmap;
-            }
-
-            charactorListBox.ItemsSource = characterDTOs;
-        }*/
-
-        private void nextMoviePageButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (movieIndex < filmDTOs.Count - 1)
-                movieIndex++;
-            //updateMovieInfo(movieIndex);
-        }
-
-        private void PreviousMoviePageButton_Click(object sender, RoutedEventArgs e)
-        {
-            movieIndex = (movieIndex > 0) ? --movieIndex : 0;
-            //updateMovieInfo(movieIndex);
-        }
 
         private void actorCommentButton_Click(object sender, RoutedEventArgs e)
         {
-            ActorCommentModal actorCommentModal = new ActorCommentModal(selectedActorId);
-            actorCommentModal.ShowDialog();
+            if(selectedActorId != -1)
+            {
+                ActorCommentModal actorCommentModal = new ActorCommentModal(selectedActorId);
+                actorCommentModal.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("No actor found", "Please select an actor", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
     }
 }

@@ -6,15 +6,15 @@
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Actors viewer" Height="450" Width="1027">
+        Title="Actors viewer" Height="666.312" Width="1029.351">
     <Window.DataContext>
         <!--Creating our ActorViewModel-->
         <local:ListActorViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="257*"></ColumnDefinition>
-            <ColumnDefinition Width="762*"></ColumnDefinition>
+            <ColumnDefinition Width="258*"></ColumnDefinition>
+            <ColumnDefinition Width="695*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="70" Height="64*"></RowDefinition>
@@ -23,10 +23,10 @@
 
         <!--Title-->
         <Label Content="Actors" FontSize="30" 
-               Margin="101,10,567,10" HorizontalAlignment="Center" Width="94" Grid.Column="1"/>
+               Margin="101.4,10,499.568,10" HorizontalAlignment="Center" Width="94" Grid.Column="1"/>
 
         <!--Column 0-->
-        <Grid Grid.Column="0" Grid.Row="1" Margin="10">
+        <Grid Grid.Column="0" Grid.Row="1" Margin="10,10,9.6,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="83*"></RowDefinition>
                 <RowDefinition Height="37*"/>
@@ -67,39 +67,38 @@
         </Grid>
 
         <!--Column 1-->
-        <StackPanel Grid.Column="1" Grid.Row="1">
 
+        <ScrollViewer Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+            <StackPanel >
 
-            <Canvas Grid.Column="1" Margin="11,21,28,10" Height="52" RenderTransformOrigin="0.5,0.5">
-                <Canvas.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Canvas.RenderTransform>
-                <Label x:Name="actorNameLabel" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="10" Canvas.Top="10" Width="312"/>
-                <Button x:Name="openCommentModalButton" Content="" Canvas.Left="327" Canvas.Top="24" Width="20" Click="actorCommentButton_Click" RenderTransformOrigin="0.5,0.5">
-                    <Button.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="-1" ScaleX="1"/>
-                            <SkewTransform AngleY="0" AngleX="0"/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Button.RenderTransform>
-                    <Button.Background>
-                        <ImageBrush ImageSource="Comment_16x.png" Stretch="Uniform"/>
-                    </Button.Background>
-                </Button>
-            </Canvas>
-            <DataGrid x:Name="dgFilms" ItemsSource="{Binding ListFilms}" AutoGenerateColumns="True" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal" >
+                    <Label Content="Add a comment :" Margin="15"/>
+                    <Button x:Name="openCommentModalButton" Content="" Height="25" Width="25" Click="actorCommentButton_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Comment_16x.png" Stretch="Uniform"/>
+                        </Button.Background>
+                    </Button>
 
+                </StackPanel>
 
-            </DataGrid>
+                <DataGrid x:Name="dgFilms" ItemsSource="{Binding ListFilms}" 
+                      AutoGenerateColumns="False" VerticalAlignment="Top"
+                      Width="Auto">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding OriginalTitle}"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding ReleaseDate}"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Runtime}"/>
+                        <DataGridTemplateColumn Header="Poster">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding PosterBitmap}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
 
-
-        </StackPanel>
+                </DataGrid>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
