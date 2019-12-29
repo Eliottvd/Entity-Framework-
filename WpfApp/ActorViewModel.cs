@@ -9,7 +9,7 @@ using WpfApp.ServiceReference1;
 
 namespace WpfApp
 {
-    public class ActorViewModel: FullActorDTO, INotifyPropertyChanged 
+    public class ActorViewModel: INotifyPropertyChanged 
     {
         FullActorDTO _acteur;
         public ActorViewModel()

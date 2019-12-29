@@ -26,8 +26,7 @@ namespace WpfApp
         private ObservableCollection<ActorViewModel> actors = new ObservableCollection<ActorViewModel>();
         private Service1Client serv;
         private ObservableCollection<string> actorNames;
-        private int movieIndex;
-        private FullActorDTO selectedActor;
+        private int movieIndex, selectedActorId;
         private List<FilmDTO> filmDTOs = new List<FilmDTO>();
         ListActorViewModel _viewModel;
         public MainWindow()
@@ -52,6 +51,7 @@ namespace WpfApp
                 if (act.ActorName.Equals(listBoxActeurs.SelectedItem))
                     tmp = act;
             }
+            selectedActorId = tmp.ActorDTO.ActorId;
             _viewModel.updateMovieInfo(tmp);
             Console.WriteLine("\n\nListe des films : ");
             foreach (FilmViewModel film in _viewModel.ListFilms)
@@ -59,6 +59,7 @@ namespace WpfApp
                 Console.WriteLine(film.OriginalTitle);
             }
             dgFilms.ItemsSource = _viewModel.ListFilms;
+            this.dgFilms.Items.Refresh();
         }
 
         private void tbActor_TextChanged(object sender, TextChangedEventArgs e)
@@ -122,7 +123,7 @@ namespace WpfApp
 
         private void actorCommentButton_Click(object sender, RoutedEventArgs e)
         {
-            ActorCommentModal actorCommentModal = new ActorCommentModal(selectedActor.ActorId);
+            ActorCommentModal actorCommentModal = new ActorCommentModal(selectedActorId);
             actorCommentModal.ShowDialog();
         }
     }

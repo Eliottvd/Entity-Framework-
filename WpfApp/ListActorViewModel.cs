@@ -111,16 +111,20 @@ namespace WpfApp
             if(actor != null)
             {
                 List<FilmDTO> filmDTOs = Serv.FindListFilmByPartialActorName(actor.ActorName);
-                List<CharacterDTO> characterDTOs = Serv.GetListCharacterByIdActorAndIdFilm(actor.ActorId, filmDTOs[movieIndex].FilmId);
-
-                listFilms.Clear();
-                foreach(FilmDTO film in filmDTOs)
+                if(filmDTOs.Count > 0)
                 {
-                    TimeSpan ts = TimeSpan.FromMinutes(film.Runtime);
-                    string.Format("{0}h{1}", ts.Hours, ts.Minutes);
-                    FilmViewModel fvm = new FilmViewModel(film.OriginalTitle, film.ReleaseDate.ToString(), string.Format("{0}h{1}", ts.Hours, ts.Minutes), film.Posterpath);
-                    listFilms.Add(fvm);
+                    List<CharacterDTO> characterDTOs = Serv.GetListCharacterByIdActorAndIdFilm(actor.ActorDTO.ActorId, filmDTOs[movieIndex].FilmId);
+
+                    listFilms.Clear();
+                    foreach(FilmDTO film in filmDTOs)
+                    {
+                        TimeSpan ts = TimeSpan.FromMinutes(film.Runtime);
+                        string.Format("{0}h{1}", ts.Hours, ts.Minutes);
+                        FilmViewModel fvm = new FilmViewModel(film.OriginalTitle, film.ReleaseDate.ToString(), string.Format("{0}h{1}", ts.Hours, ts.Minutes), film.Posterpath);
+                        listFilms.Add(fvm);
+                    }
                 }
+                
             }
             
         }
