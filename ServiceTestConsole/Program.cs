@@ -35,6 +35,7 @@ namespace ServiceTestConsole
                 {
                     case ConsoleKey.NumPad1:
                         Console.WriteLine("Partial actor name : ");
+                        
                         filmDTOs = ser.FindListFilmByPartialActorName(Console.ReadLine());
                         foreach (FilmDTO f in filmDTOs)
                         {

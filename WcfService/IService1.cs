@@ -33,6 +33,12 @@ namespace WcfService
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
+
+        [OperationContract]
+        List<ActorDTO> GetAllActors();
+
+        [OperationContract]
+        List<ActorDTO> FindListActorByPartialActorName(String name, int pageNumber, int pageSize);
     }
 
 

@@ -4,6 +4,7 @@ namespace DTO
 {
     public class FilmDTO
     {
+        public int FilmId { get; set; }
         public string Title { get; set; }
         public string OriginalTitle { get; set; }
         public DateTime? ReleaseDate { get; set; }
@@ -13,9 +14,7 @@ namespace DTO
         public string Posterpath { get; set; }
         public int Budget { get; set; }
         public string TagLine { get; set; }
-        
         public string Status { get; set; }
-
         public string Rating { get; set; }
 
         public FilmDTO()

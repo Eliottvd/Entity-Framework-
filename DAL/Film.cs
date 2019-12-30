@@ -20,10 +20,8 @@ namespace DAL
         public string Posterpath { get; set; }
         public int Budget { get; set; }
         public string TagLine { get; set; }
-
         public int StatusId { get; set; }
         public Status Status { get; set; }
-
         public int RatingId { get; set; }
         public Rating Rating { get; set; }
 
@@ -33,6 +31,9 @@ namespace DAL
             CharacterActors = new List<CharacterActors>();
             Genres = new List<Genre>();
             Directors = new List<Director>();
+            Actors = new List<Actor>();
+            Characters = new List<Character>();
+
         }
 
         public virtual ICollection<CharacterActors> CharacterActors { get; set; }

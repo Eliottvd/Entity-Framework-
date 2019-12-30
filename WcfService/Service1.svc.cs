@@ -62,9 +62,19 @@ namespace WcfService
             return bllManager.GetFullActorDetailsByIdActor(i);
         }
 
+        public List<ActorDTO> GetAllActors()
+        {
+            return bllManager.getAllActors();
+        }
+
         public void InsertCommentOnActorId(CommentDTO comment, int ActorId)
         {
             bllManager.InsertCommentOnActorId(comment, ActorId);
+        }
+
+        public List<ActorDTO> FindListActorByPartialActorName(String name, int pageNumber, int pageSize)
+        {
+            return bllManager.FindListActorByPartialActorName(name, pageNumber, pageSize);
         }
     }
 }

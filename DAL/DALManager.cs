@@ -42,7 +42,8 @@ namespace DAL
                 {
                     ca.Actor = film.CharacterActors.First(o => o.ActorId == ca.ActorId).Actor;
                 }
-
+                
+                film.Actors.Add(ca.Actor);
                 // Characters duplicates
                 if (FilmCtx.Characters.Any(o => o.CharacterName == ca.Character.CharacterName))
                 {
@@ -53,6 +54,9 @@ namespace DAL
                 {
                     ca.Character = film.CharacterActors.First(o => o.Character.CharacterName == ca.Character.CharacterName).Character;
                 }
+                ca.Actor.Characters.Add(ca.Character);
+                ca.Character.Actors.Add(ca.Actor);
+                film.Characters.Add(ca.Character);
             }
 
             foreach (Genre g in film.Genres)

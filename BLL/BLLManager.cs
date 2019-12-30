@@ -43,6 +43,7 @@ namespace BLL
                 {
                     tmp = new FilmDTO
                     {
+                        FilmId = ca.Film.FilmId,
                         Title = ca.Film.Title,
                         OriginalTitle = ca.Film.OriginalTitle,
                         ReleaseDate = ca.Film.ReleaseDate,
@@ -163,6 +164,30 @@ namespace BLL
             return filmDTOs;
         }
 
+        public List<ActorDTO> FindListActorByPartialActorName(String name, int pageNumber, int pageSize)
+        {
+            List<ActorDTO> actorDTOs = new List<ActorDTO>();
+            try
+            {
+                //IQueryable<Actor> acteurs = dalM.FilmCtx.Actors.Where(a => a.Name.Contains(name));
+                IQueryable<Actor> acteurs = dalM.FilmCtx.Actors.Where(a => a.Name.Contains(name)).OrderBy(a => a.Name).Skip(pageNumber * pageSize).Take(pageSize);
+
+                foreach (Actor a in acteurs)
+                {
+                    actorDTOs.Add(new ActorDTO
+                    {
+                        ActorId = a.ActorId,
+                        Name = a.Name
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e.Message);
+            }
+            return actorDTOs;
+        }
+
         public FullActorDTO GetFullActorDetailsByIdActor(int idActor)
         {
             FullActorDTO FullActeur = new FullActorDTO();
@@ -171,6 +196,43 @@ namespace BLL
                 Actor acteur = dalM.FilmCtx.Actors.Find(idActor);
                 FullActeur.ActorId = acteur.ActorId;
                 FullActeur.Name = acteur.Name;
+                FullActeur.Comments = new List<CommentDTO>();
+                foreach (var comment in acteur.Comments)
+                {
+                    FullActeur.Comments.Add(new CommentDTO { 
+                        Date = comment.Date, 
+                        Content = comment.Content, 
+                        Rate = comment.Rate, 
+                        Avatar = comment.Avatar 
+                    });
+                }
+                FullActeur.Films = new List<FilmDTO>();
+                foreach (var film in acteur.Films)
+                {
+                    FullActeur.Films.Add(new FilmDTO
+                    {
+                        Title = film.Title,
+                        OriginalTitle = film.OriginalTitle,
+                        ReleaseDate = film.ReleaseDate,
+                        VoteAverage = film.VoteAverage,
+                        VoteCount = film.VoteCount,
+                        Runtime = film.Runtime,
+                        Posterpath = film.Posterpath,
+                        Budget = film.Budget,
+                        TagLine = film.TagLine,
+                        Status = film.Status == null ? "" : film.Status.StatusName,
+                        Rating = film.Rating == null ? "" : film.Rating.Type
+                    });
+                }
+                FullActeur.Characters = new List<CharacterDTO>();
+                foreach (var character in acteur.Characters)
+                {
+                    FullActeur.Characters.Add(new CharacterDTO
+                    {
+                        CharacterId = character.CharacterId,
+                        Name = character.CharacterName
+                    });
+                }
             }
             catch (Exception e)
             {
@@ -183,21 +245,38 @@ namespace BLL
         public void InsertCommentOnActorId(CommentDTO comment, int actorId)
         {
             Actor acteur = dalM.FilmCtx.Actors.Find(actorId);
-            
-                Comment c = new Comment()
-                {
-                    Actor = acteur,
-                    Rate = comment.Rate,
-                    Avatar = comment.Avatar,
-                    Content = comment.Content,
-                    Date = DateTime.Now
-                };
-                //acteur.Comments.Add(c);
-                
 
-                dalM.AddComment(c);
+            Comment c = new Comment()
+            {
+                Actor = acteur,
+                Rate = comment.Rate,
+                Avatar = comment.Avatar,
+                Content = comment.Content,
+                Date = comment.Date
+            };
+            acteur.Comments.Add(c);
+            dalM.AddComment(c);
 
 
         }
+
+        public List<ActorDTO> getAllActors()
+        {
+            List<ActorDTO> actorDTOs = new List<ActorDTO>();
+
+            List<Actor> listActor = dalM.getActor();
+
+            foreach (Actor a in listActor)
+            {
+                actorDTOs.Add(new ActorDTO
+                {
+                    Name = a.Name,
+                    ActorId = a.ActorId
+                });
+            }
+
+            return actorDTOs;
+        }
+
     }
 }
