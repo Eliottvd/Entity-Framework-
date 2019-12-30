@@ -47,6 +47,8 @@ namespace WpfApp
             }
         }
 
+        
+
 
         public  event PropertyChangedEventHandler PropertyChanged;
 
