@@ -167,7 +167,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Actor.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\listActors.cs" />
+    <Compile Include="Models\listComments.cs" />
     <Compile Include="Models\listMovies.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -249,6 +251,7 @@
     <Content Include="Views\Movie\Next.cshtml" />
     <Content Include="Views\Movie\Previous.cshtml" />
     <Content Include="Views\Movie\Movies.cshtml" />
+    <Content Include="Views\Movie\Comments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

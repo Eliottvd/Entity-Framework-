@@ -13,18 +13,25 @@
     <table>
         @foreach (var item in Model.listActorsNames)
         {
-            <tr>
-                <td>
-                    @item
-                </td>
-                <td>
-                    <form method="POST" action="/Movie/Movies">
-                        <label>&nbsp;</label>
-                        <input type="hidden" name="fullActName" value=@item />
-                        <input type="submit" value="View movies" class="submit" />
-                    </form>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @item
+            </td>
+            <td>
+                <form method="POST" action="/Movie/Movies">
+                    <label>&nbsp;</label>
+                    <input type="hidden" name="fullActName" value=@item />
+                    <input type="submit" value="View movies" class="submit" />
+                </form>
+            </td>
+            <td>
+                <form method="POST" action="/Movie/Comments">
+                    <label>&nbsp;</label>
+                    <input type="hidden" name="fullActName" value=@item />
+                    <input type="submit" value="Add a comment" class="submit" />
+                </form>
+            </td>
+        </tr>
         }
     </table>
     <form method="POST" action="/Movie/Next">

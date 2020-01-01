@@ -71,5 +71,16 @@ namespace WebApp.Controllers
             WebApp.Models.listMovies MovModel = new listMovies(filmDTOs);
             return View(MovModel);
         }
+
+        public ActionResult Comments(string fullActName)
+        {
+            ViewBag.ActName = fullActName; 
+            List<ActorDTO> actorDTOs = serv.FindListActorByPartialActorName(fullActName, 0, 10);
+            ActorDTO act = actorDTOs.First();
+            FullActorDTO fullAct = serv.GetFullActorDetailsByIdActor(act.ActorId);
+            listComments Comments = new listComments(fullAct.Comments);
+
+            return View(Comments);
+        }
     }
 }
