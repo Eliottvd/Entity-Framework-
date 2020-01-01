@@ -79,8 +79,24 @@ namespace WebApp.Controllers
             ActorDTO act = actorDTOs.First();
             FullActorDTO fullAct = serv.GetFullActorDetailsByIdActor(act.ActorId);
             listComments Comments = new listComments(fullAct.Comments);
+            ViewBag.ActorId = act.ActorId;
 
             return View(Comments);
+        }
+
+        public ActionResult AddComment(int ActorId, string avatar, string content, string rate)
+        {
+
+            serv.InsertCommentOnActorId(new CommentDTO()
+            {
+                Avatar = avatar,
+                Content = content,
+                Rate = float.Parse(rate),
+                Date = DateTime.Now,
+                
+            }, ActorId);
+
+            return View();
         }
     }
 }

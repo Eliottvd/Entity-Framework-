@@ -22,5 +22,13 @@ namespace WebApp.Models
                 listCom.Add(new Comment(com));
             }
         }
+
+        public List<Comment> listComSortedByDateDesc
+        {
+            get
+            {
+                return listCom.OrderByDescending(c => c.Date).ToList();
+            }
+        }
     }
 }
