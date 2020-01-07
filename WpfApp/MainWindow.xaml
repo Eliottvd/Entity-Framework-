@@ -6,27 +6,27 @@
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Actors viewer" Height="666.312" Width="1029.351">
+        Title="Actors viewer" Height="543.312" Width="1029.351">
     <Window.DataContext>
         <!--Creating our ActorViewModel-->
         <local:ListActorViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="258*"></ColumnDefinition>
-            <ColumnDefinition Width="695*"></ColumnDefinition>
+            <ColumnDefinition Width="278*"></ColumnDefinition>
+            <ColumnDefinition Width="743*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition MaxHeight="70" Height="64*"></RowDefinition>
-            <RowDefinition Height="355*"></RowDefinition>
+            <RowDefinition MaxHeight="70" Height="35*"></RowDefinition>
+            <RowDefinition Height="221*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!--Title-->
         <Label Content="Actors" FontSize="30" 
-               Margin="101.4,10,499.568,10" HorizontalAlignment="Center" Width="94" Grid.Column="1"/>
+               Margin="136,10,513,10" HorizontalAlignment="Center" Width="94" Grid.Column="1"/>
 
         <!--Column 0-->
-        <Grid Grid.Column="0" Grid.Row="1" Margin="10,10,9.6,10">
+        <Grid Grid.Column="0" Grid.Row="1" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="83*"></RowDefinition>
                 <RowDefinition Height="37*"/>
@@ -40,75 +40,91 @@
             </StackPanel>
 
             <!--C0: Row 1-->
+            <Canvas Margin="20,6,217,21" Grid.Row="1">
+                <Button x:Name="nextPageButton" Content="" Click="nextPageButton_Click" RenderTransformOrigin="1.05,0.45" VerticalAlignment="Top" Height="20" Canvas.Left="1" Width="20">
+                    <Button.Background>
+                        <ImageBrush ImageSource="ASX_Next_blue_16x.png" Stretch="Uniform"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="PreviousPageButton" Content="" HorizontalAlignment="Left" VerticalAlignment="Top"  Click="PreviousPageButton_Click" Width="20" Height="20">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                            <SkewTransform AngleY="0" AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <Button.Background>
+                        <ImageBrush ImageSource="ASX_Next_blue_16x.png" Stretch="Uniform"/>
+                    </Button.Background>
+                </Button>
+            </Canvas>
             <ScrollViewer Grid.Row="2">
                 <ListBox x:Name="listBoxActeurs" 
-                         ItemsSource="{Binding ListActorsName}" SelectionChanged="ListBoxActeurs_SelectionChanged">
-
-                </ListBox>
+                         ItemsSource="{Binding ListActorsName}" SelectionChanged="ListBoxActeurs_SelectionChanged"/>
             </ScrollViewer>
-            <Button x:Name="nextPageButton" Content="" Margin="21,6,0,0" Click="nextPageButton_Click" RenderTransformOrigin="1.05,0.45" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" Height="20">
-                <Button.Background>
-                    <ImageBrush ImageSource="ASX_Next_blue_16x.png" Stretch="Uniform"/>
-                </Button.Background>
-            </Button>
-            <Button x:Name="PreviousPageButton" Content="" HorizontalAlignment="Left" Margin="20,6,0,0" VerticalAlignment="Top"  Click="PreviousPageButton_Click" Grid.Row="1" Width="20" Height="20">
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
-                        <SkewTransform AngleY="0" AngleX="0"/>
-                        <RotateTransform Angle="0"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Button.RenderTransform>
-                <Button.Background>
-                    <ImageBrush ImageSource="ASX_Next_blue_16x.png" Stretch="Uniform"/>
-                </Button.Background>
-            </Button>
         </Grid>
 
-        <!--Column 1-->
+        <Grid Margin="10" Grid.Row="1" Grid.Column="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="36*"/>
+                <RowDefinition Height="175*"/>
+            </Grid.RowDefinitions>
 
-        <ScrollViewer Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
-            <StackPanel >
+            <StackPanel Orientation="Horizontal" Margin="0,2,0,12" >
+                <Label x:Name="lblActorName" Content="" FontSize="20" Margin="10,10,0,10"/>
+                <Label x:Name="lblActorComments" Content="" FontSize="20" Margin="0,10,0,10"/>
+                <Label Content="Add a comment :" Margin="15"/>
+                <Button x:Name="openCommentModalButton" Content="" Height="25" Width="25" Click="actorCommentButton_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Comment_16x.png" Stretch="Uniform"/>
+                    </Button.Background>
+                </Button>
 
-                <StackPanel Orientation="Horizontal" >
-                    <Label x:Name="lblActorName" Content="" FontSize="20" Margin="10,10,0,10"/>
-                    <Label x:Name="lblActorComments" Content="" FontSize="20" Margin="0,10,0,10"/>
-                    <Label Content="Add a comment :" Margin="15"/>
-                    <Button x:Name="openCommentModalButton" Content="" Height="25" Width="25" Click="actorCommentButton_Click">
-                        <Button.Background>
-                            <ImageBrush ImageSource="Comment_16x.png" Stretch="Uniform"/>
-                        </Button.Background>
-                    </Button>
+            </StackPanel>
 
-                </StackPanel>
-
+            <ScrollViewer Margin="0,18,0,0" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" Grid.Row="1">
                 <DataGrid x:Name="dgFilms" ItemsSource="{Binding ListFilms}" 
-                      AutoGenerateColumns="False" VerticalAlignment="Top"
-                      Width="Auto">
+                    AutoGenerateColumns="False" VerticalAlignment="Top"
+                    Width="697" GridLinesVisibility="None" IsReadOnly="True">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGrid.CellStyle>
+
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Poster">
+                        <DataGridTemplateColumn Header="Poster" IsReadOnly="True" Width="0.3*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Image Source="{Binding PosterBitmap}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
-                        <DataGridTextColumn Header="Release date" Binding="{Binding ReleaseDate}"/>
-                        <DataGridTextColumn Header="Runtime" Binding="{Binding Runtime}"/>
-                        <DataGridTemplateColumn Header="Characters">
+                        <DataGridTextColumn Header="Title" Binding="{Binding Title}" IsReadOnly="True" Width="0.175*"/>
+                        <DataGridTextColumn Header="Release date" Binding="{Binding ReleaseDate}" IsReadOnly="True" Width="0.25*"/>
+                        <DataGridTextColumn Header="Runtime" Binding="{Binding Runtime}" IsReadOnly="True" Width="0.1*"/>
+                        <DataGridTemplateColumn Header="Characters" IsReadOnly="True" Width="0.175*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <ListBox x:Name="listBoxDgCharacters" ItemsSource="{Binding ListChar}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
+
                     </DataGrid.Columns>
 
                 </DataGrid>
-            </StackPanel>
-        </ScrollViewer>
+            </ScrollViewer>
+        </Grid>
+
+        <!--Column 1-->
     </Grid>
 </Window>

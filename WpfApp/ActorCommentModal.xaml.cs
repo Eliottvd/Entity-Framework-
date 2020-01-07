@@ -44,6 +44,7 @@ namespace WpfApp
                 updateCommentTable();
                 addCommentTextBox.Text = "";
                 rateCommentTextBox.Text = "";
+                //update actor list
             }
 
         }

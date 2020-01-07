@@ -46,6 +46,11 @@ namespace WpfApp
 
         private void ListBoxActeurs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            updateMovieAndActorInfo();
+            
+        }
+        private void updateMovieAndActorInfo()
+        {
             float tot = 0;
             int nbCom = 0;
             ActorViewModel tmp = null;
@@ -58,27 +63,27 @@ namespace WpfApp
             {
                 selectedActorId = tmp.ActorDTO.ActorId;
                 lblActorName.Content = tmp.ActorDTO.Name;
-                foreach(CommentDTO com in tmp.ActorDTO.Comments)
+                foreach (CommentDTO com in tmp.ActorDTO.Comments)
                 {
                     tot += com.Rate;
                     nbCom++;
                 }
-                if(nbCom > 0)
+                if (nbCom > 0)
                 {
                     tot /= nbCom;
-                    lblActorComments.Content = tot + " (" + nbCom + ")";
+                    lblActorComments.Content = tot.ToString("###") + " (" + nbCom + ")";
                 }
                 else
                     lblActorComments.Content = "/ (0)";
-                
-            } 
+
+            }
             else
             {
                 selectedActorId = -1;
                 lblActorName.Content = "";
                 lblActorComments.Content = "";
             }
-            
+
             _viewModel.updateMovieInfo(tmp);
             Console.WriteLine("\n\nListe des films : ");
             foreach (FilmViewModel film in _viewModel.ListFilms)
@@ -88,7 +93,6 @@ namespace WpfApp
             dgFilms.ItemsSource = _viewModel.ListFilms;
             this.dgFilms.Items.Refresh();
         }
-
         private void tbActor_TextChanged(object sender, TextChangedEventArgs e)
         {
             _viewModel.resetPageNbr();
@@ -108,18 +112,26 @@ namespace WpfApp
             listBoxActeurs.ItemsSource = _viewModel.ListActorsName;
         }
 
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scv = (ScrollViewer)sender;
+            scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
+            e.Handled = true;
+        }
+
         private void actorCommentButton_Click(object sender, RoutedEventArgs e)
         {
             if(selectedActorId != -1)
             {
                 ActorCommentModal actorCommentModal = new ActorCommentModal(selectedActorId);
                 actorCommentModal.ShowDialog();
+                _viewModel.updateListActors(tbActor.Text);
+                updateMovieAndActorInfo();
             }
             else
             {
                 MessageBox.Show("No actor found", "Please select an actor", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
         }
     }
 }
