@@ -1,56 +1,76 @@
 ﻿@model WebApp.Models.listComments
 
 <html>
-    <body>
-        <h1>Comments</h1>
+<head>
+    <!-- Font Awesome Icon Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .checked {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+    <h1>Comments</h1>
 
-        <div>
-            <h2>Add a comment : </h2>
+    <div>
+        <form method="POST" action="/Movie/AddComment">
+            <div class="form-group">
+                <label for="avatar">User</label>
+                <input type="text" name="avatar" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="content">Content</label>
+                <input type="text" name="content" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="rate">Rate</label>
+                <input type="text" name="rate" class="form-control" />
+            </div>
+            <input type="hidden" name="ActorId" value=@ViewBag.ActorId />
+            <button class="btn btn-primary" type="submit">Add Comment</button>
+        </form>
 
-            <form method="POST" action="/Movie/AddComment">
-                <br /><br />User :    <input type="text" name="avatar" value="" />
-                <br /><br />Content : <input type="text" name="content" value="" width="300" height="60" />
-                <br /><br />Rate :    <input type="text" name="rate" value="" width="20" />
-                <input type="hidden" name="ActorId" value=@ViewBag.ActorId /><br/>
-                <label>&nbsp;</label><br />
-                <input type="submit" value="Add Comment" class="submit" />
-            </form>
+    </div>
+    <br />
+    <table class="table">
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Content</th>
+            <th scope="col">Avatar</th>
+            <th scope="col">Rate</th>
+        </tr>
+        @foreach (var item in Model.listComSortedByDateDesc)
+        {
+            <tr>
+                <td>
+                    @item.Date
+                </td>
+                <td>
+                    @item.Content
+                </td>
+                <td>
+                    @item.Avatar
+                </td>
+                <td>
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        if (i < item.Rate)
+                        {
+                            <span class="fa fa-star checked"></span>
+                        }
+                        else
+                        {
+                            <span class="fa fa-star"></span>
+                        }
 
-        </div>
-        <div>
-            @foreach (var item in Model.listComSortedByDateDesc)
-            {
-                <hr />
-                <dl class="row">
-                    <dt class="col-sm-2">
-                        Date
-                    </dt>
-                    <dd class="col-sm-10">
-                        @item.Date
-                    </dd>
-                    <dt class="col-sm-2">
-                        Content
-                    </dt>
-                    <dd class="col-sm-10">
-                        @item.Content
-                    </dd>
-                    <dt class="col-sm-2">
-                        Avatar
-                    </dt>
-                    <dd class="col-sm-10">
-                        @item.Avatar
-                    </dd>
-                    <dt class="col-sm-2">
-                        Rate
-                    </dt>
-                    <dd class="col-sm-10">
-                        @item.Rate
-                    </dd>
-                </dl>
-            }
-        </div>
-        <div>
-            @Html.ActionLink("Back to home", "index")
-        </div>
-    </body>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+    <div>
+        @Html.ActionLink("Back to home", "index", null, new { @class = "btn btn-primary" })
+    </div>
+</body>
 </html>

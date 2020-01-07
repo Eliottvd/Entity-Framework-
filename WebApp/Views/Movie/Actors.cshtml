@@ -16,13 +16,13 @@
                 <td>
                     @item
                 </td>
-                <td>
+                <td class="col-md-2">
                     <form method="POST" action="/Movie/Movies">
                         <input type="hidden" name="fullActName" value=@item />
                         <button class="btn btn-info" type="submit">View movies</button>
                     </form>
                 </td>
-                <td>
+                <td class="col-md-2">
                     <form method="POST" action="/Movie/Comments">
                         <input type="hidden" name="fullActName" value=@item />
                         <button class="btn btn-info" type="submit">Add a comment</button>
