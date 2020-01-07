@@ -3,42 +3,38 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Movies</h1>
 
 <div>
-    <h4>Movie</h4>
+    <table class="table">
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Posterpath</th>
+            <th scope="col">Runtime</th>
+            <th scope="col">Release Date</th>
+        </tr>
+        @foreach (var item in Model.listFilm)
+        {
 
-    @foreach (var item in Model.listFilm)
-    {
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                Title
-            </dt>
-            <dd class="col-sm-10">
-                @item.Title
-            </dd>
-            <dt class="col-sm-2">
-                Posterpath
-            </dt>
-            <dd class="col-sm-10">
-                @item.Posterpath
-            </dd>
-            <dt class="col-sm-2">
-                Runtime
-            </dt>
-            <dd class="col-sm-10">
-                @item.Runtime
-            </dd>
-            <dt class="col-sm-2">
-                Release Date
-            </dt>
-            <dd class="col-sm-10">
-                @item.ReleaseDate
-            </dd>
-        </dl>
-    }
+            <tr>
+                <td>
+                    @item.Title
+                </td>
+                <td>
+                    @{
+                        string imagePath = Url.Content("http://image.tmdb.org/t/p/w185" + item.Posterpath);
+                    }
+                    <img src="@imagePath" />
+                </td>
+                <td>
+                    @item.Runtime
+                </td>
+                <td>
+                    @item.ReleaseDate
+                </td>
+            </tr>
+
+        }
+    </table>
 </div>
-<div>
-    @Html.ActionLink("Back to home", "index")
-</div>
+    @Html.ActionLink("Back to home", "index", null, new { @class = "btn btn-primary" })

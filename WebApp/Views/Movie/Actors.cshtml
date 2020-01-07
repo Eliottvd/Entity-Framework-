@@ -7,46 +7,38 @@
 
 <html>
 <body>
-    <h2>Welcome</h2>
     <h3>@ViewBag.PartialName</h3>
 
-    <table>
+    <table class="table">
         @foreach (var item in Model.listActorsNames)
         {
-        <tr>
-            <td>
-                @item
-            </td>
-            <td>
-                <form method="POST" action="/Movie/Movies">
-                    <label>&nbsp;</label>
-                    <input type="hidden" name="fullActName" value=@item />
-                    <input type="submit" value="View movies" class="submit" />
-                </form>
-            </td>
-            <td>
-                <form method="POST" action="/Movie/Comments">
-                    <label>&nbsp;</label>
-                    <input type="hidden" name="fullActName" value=@item />
-                    <input type="submit" value="Add a comment" class="submit" />
-                </form>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @item
+                </td>
+                <td>
+                    <form method="POST" action="/Movie/Movies">
+                        <input type="hidden" name="fullActName" value=@item />
+                        <button class="btn btn-info" type="submit">View movies</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="POST" action="/Movie/Comments">
+                        <input type="hidden" name="fullActName" value=@item />
+                        <button class="btn btn-info" type="submit">Add a comment</button>
+                    </form>
+                </td>
+            </tr>
         }
     </table>
-    <form method="POST" action="/Movie/Next">
-        <label>&nbsp;</label>
-        <input type="hidden" name="actName" value=@ViewBag.PartialName />
-        <input type="hidden" name="nbPageActors" value=@ViewBag.nbPageActors />
-        <input type="submit" value="Next" class="submit" />
-    </form>
+    <form method="POST">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <input type="hidden" name="actName" value=@ViewBag.PartialName />
+            <input type="hidden" name="nbPageActors" value=@ViewBag.nbPageActors />
 
-    <form method="POST" action="/Movie/Previous">
-        <label>&nbsp;</label>
-        <input type="hidden" name="actName" value=@ViewBag.PartialName />
-        <input type="hidden" name="nbPageActors" value=@ViewBag.nbPageActors />
-        <input type="submit" value="Previous" class="submit" />
+            <button class="btn btn-primary" type="submit" formAction="/Movie/Previous">Previous</button>
+            <button class="btn btn-primary" type="submit" formAction="/Movie/Next">Next</button>
+        </div>
     </form>
-
 </body>
 </html>

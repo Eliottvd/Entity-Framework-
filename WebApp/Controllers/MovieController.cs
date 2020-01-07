@@ -38,18 +38,18 @@ namespace WebApp.Controllers
             ViewBag.PartialName = actName;
             ViewBag.nbPageActors = nbPageActors;
 
-            return View(tmp);
+            return View("Actors", tmp);
         }
 
         public ActionResult Previous(string actName, int nbPageActors)
         {
-            nbPageActors--;
+            nbPageActors = nbPageActors > 0 ? --nbPageActors: nbPageActors;
             List<ActorDTO> actorDTOs = serv.FindListActorByPartialActorName(actName, nbPageActors, pageSize);
             listActors tmp = new listActors(actorDTOs);
             ViewBag.PartialName = actName;
             ViewBag.nbPageActors = nbPageActors;
 
-            return View(tmp);
+            return View("Actors", tmp);
         }
 
         public ActionResult Details(string fullActName)
