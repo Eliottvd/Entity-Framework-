@@ -18,8 +18,8 @@ namespace ConsoleApp
         {
             
             StreamReader f;
-            int startLine = 28800;
-            int endLine = 29000;
+            int startLine = 0;
+            int endLine = 200;
 
             if (System.Environment.MachineName == "LAPTOP-QHT69N73")
                 f = new StreamReader(@"D:\OneDrive - Enseignement de la Province de Liège\Ecole\BLOC3\Q1\C#\movies_v2.txt");

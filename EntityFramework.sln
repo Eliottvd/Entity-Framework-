@@ -24,6 +24,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp", "WpfApp\WpfApp.csp
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{5BA0CB40-B927-49A0-8E0C-F1CE342B5575}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7179415D-30D1-4527-B182-CF76167C963C} = {7179415D-30D1-4527-B182-CF76167C963C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
