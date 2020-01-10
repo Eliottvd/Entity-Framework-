@@ -7,8 +7,10 @@ using System.Web;
 
 namespace WebApp.Models
 {
+    
     public class Movie : FilmDTO
     {
+        public string RuntimeString;
         public Movie(FilmDTO film)
         {
             FilmId = film.FilmId;
@@ -21,6 +23,8 @@ namespace WebApp.Models
             TagLine = film.TagLine;
             Status = film.Status;
             Rating = film.Rating;
+            TimeSpan ts = TimeSpan.FromMinutes(film.Runtime);
+            RuntimeString = string.Format("{0}h{1}", ts.Hours, ts.Minutes);
         }
 
     }

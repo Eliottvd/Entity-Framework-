@@ -80,6 +80,7 @@ namespace WebApp.Controllers
             FullActorDTO fullAct = serv.GetFullActorDetailsByIdActor(act.ActorId);
             listComments Comments = new listComments(fullAct.Comments);
             ViewBag.ActorId = act.ActorId;
+            ViewBag.ActorName = act.Name;
 
             return View(Comments);
         }
