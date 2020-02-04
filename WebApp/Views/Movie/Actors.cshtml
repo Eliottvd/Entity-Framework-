@@ -1,0 +1,44 @@
+﻿@model WebApp.Models.listActors
+@{
+    ViewData["Title"] = "Welcome";
+}
+
+<!DOCTYPE html>
+
+<html>
+<body>
+    <h3>@ViewBag.PartialName</h3>
+
+    <table class="table">
+        @foreach (var item in Model.listActorsNames)
+        {
+            <tr>
+                <td>
+                    @item
+                </td>
+                <td class="col-md-2">
+                    <form method="POST" action="/Movie/Movies">
+                        <input type="hidden" name="fullActName" value=@item />
+                        <button class="btn btn-info" type="submit">View movies</button>
+                    </form>
+                </td>
+                <td class="col-md-2">
+                    <form method="POST" action="/Movie/Comments">
+                        <input type="hidden" name="fullActName" value=@item />
+                        <button class="btn btn-info" type="submit">Add a comment</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+    <form method="POST">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <input type="hidden" name="actName" value=@ViewBag.PartialName />
+            <input type="hidden" name="nbPageActors" value=@ViewBag.nbPageActors />
+
+            <button class="btn btn-primary" type="submit" formAction="/Movie/Previous">Previous</button>
+            <button class="btn btn-primary" type="submit" formAction="/Movie/Next">Next</button>
+        </div>
+    </form>
+</body>
+</html>
